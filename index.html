@@ -1000,13 +1000,13 @@ function calcular() {
   const p  = PRICES[barrio];
   const m  = MULT[estado];
 
-  const sMin = Math.round(p.s[0] * m[0] * metros / 1000) * 1000;
-  const sMax = Math.round(p.s[1] * m[1] * metros / 1000) * 1000;
-  const sMid = Math.round((sMin + sMax) / 2 / 1000) * 1000;
+  const sMid = Math.round((p.s[0] + p.s[1]) / 2 * ((m[0] + m[1]) / 2) * metros / 1000) * 1000;
+  const sMin = sMid - 35000;
+  const sMax = sMid + 35000;
 
-  const rMin = Math.round(p.r[0] * m[0] * metros * REG / 10) * 10;
-  const rMax = Math.round(p.r[1] * m[1] * metros * REG / 10) * 10;
-  const rMid = Math.round((rMin + rMax) / 2 / 10) * 10;
+  const rMid = Math.round((p.r[0] + p.r[1]) / 2 * ((m[0] + m[1]) / 2) * metros * REG / 10) * 10;
+  const rMin = rMid - 150;
+  const rMax = rMid + 150;
 
   const precioVenta    = `${fmt(sMid)} (${fmt(sMin)} – ${fmt(sMax)})`;
   const precioAlquiler = `${fmt(rMid)}/mes (${fmt(rMin)} – ${fmt(rMax)}/mes)`;
