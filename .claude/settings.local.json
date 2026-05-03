@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/guilllermoalbarran/web-inmobiliaria remote add origin https://github.com/GuillermoAlbarrandiaz/Volta.git)",
+      "Bash(git -C /Users/guilllermoalbarran/web-inmobiliaria push -u origin main)",
+      "Bash(git *)"
+    ]
+  }
+}
