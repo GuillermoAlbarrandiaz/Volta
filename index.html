@@ -100,18 +100,7 @@
       {"@type":"Offer","itemOffered":{"@type":"Service","name":"Gestión de edificios completos en Barcelona"}},
       {"@type":"Offer","itemOffered":{"@type":"Service","name":"Alquiler de larga estancia en Barcelona"}}
     ]
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5",
-    "reviewCount": "3",
-    "bestRating": "5"
-  },
-  "review": [
-    {"@type":"Review","author":{"@type":"Person","name":"Marta Casals"},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Volta analizó todas las opciones y en tres semanas teníamos un plan ejecutable. La rentabilidad fue un 40% superior a lo que yo estimaba."},
-    {"@type":"Review","author":{"@type":"Person","name":"Jordi Puigdomènech"},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Diseñaron una estrategia mixta que maximizó la ocupación. Muy profesionales y con un conocimiento real del mercado barcelonés."},
-    {"@type":"Review","author":{"@type":"Person","name":"Anna Roca"},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Vendí mi piso en el Poblenou en 6 semanas, por encima del precio de mercado."}
-  ]
+  }
 }
 </script>
 <style>
@@ -250,6 +239,15 @@ select.f-control{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://w
 .test-avatar{width:44px;height:44px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.95rem;flex-shrink:0}
 .test-name{font-weight:700;font-size:.88rem}
 .test-role{font-size:.78rem;color:var(--gray)}
+.test-star-off{color:#d6d6d6}
+.test-summary{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-top:1.2rem;flex-wrap:wrap}
+.test-summary .test-stars{margin:0}
+.test-summary-score{font-size:1.6rem;font-weight:800;letter-spacing:-.02em}
+.test-summary-count{font-size:.88rem;color:var(--gray)}
+.test-grid:not(.expanded) .test-extra{display:none}
+.test-more-wrap{text-align:center;margin-top:2.5rem}
+.test-more{background:transparent;border:1.5px solid var(--dark);color:var(--dark);padding:.85rem 1.8rem;border-radius:8px;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s}
+.test-more:hover{background:var(--dark);color:#fff}
 
 /* ── CTA FINAL ── */
 .cta-final{background:var(--dark);color:#fff;text-align:center;padding:120px 5rem}
@@ -699,42 +697,341 @@ select.f-control{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://w
   <div class="fade-in" style="text-align:center;max-width:680px;margin:0 auto 1rem">
     <div class="tag">Testimonios</div>
     <h2 class="sec-title">Propietarios que ya<br>confían en Volta.</h2>
+    <div class="test-summary"><span class="test-summary-score">4,8</span><span class="test-stars">★★★★★</span><span class="test-summary-count">30 opiniones de propietarios</span></div>
   </div>
-  <div class="test-grid">
+  <div class="test-grid" id="testGrid">
     <div class="test-card fade-in d1">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"Tenía un piso en el Eixample que llevaba dos años sin una estrategia clara. Volta analizó todas las opciones —venta, alquiler temporal, coliving— y en tres semanas teníamos un plan ejecutable. La rentabilidad fue un 40% superior a lo que yo estimaba."</p>
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Desde que trabajo con Volta me he despreocupado completamente de la gestión del piso. Se encargan de los inquilinos, las incidencias y toda la operativa. Muy profesionales y siempre disponibles."</p>
       <div class="test-author">
-        <div class="test-avatar">MC</div>
+        <div class="test-avatar">CM</div>
         <div>
-          <div class="test-name">Marta Casals</div>
-          <div class="test-role">Propietaria · Eixample Dret, 110 m²</div>
+          <div class="test-name">Carlos Martínez</div>
+          <div class="test-role">Propietario · Eixample</div>
         </div>
       </div>
     </div>
     <div class="test-card fade-in d2">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"Heredé un edificio de 8 pisos en Gràcia y no sabía por dónde empezar. El equipo de Volta diseñó una estrategia mixta —alquiler temporal corporativo y larga estancia— que maximizó la ocupación. Muy profesionales y con un conocimiento real del mercado."</p>
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Tenía dudas sobre si vender o alquilar mi piso y me ayudaron a analizar las dos opciones con números reales. Finalmente optamos por el alquiler temporal y estoy muy contenta con el resultado."</p>
       <div class="test-author">
-        <div class="test-avatar">JP</div>
+        <div class="test-avatar">LG</div>
         <div>
-          <div class="test-name">Jordi Puigdomènech</div>
-          <div class="test-role">Propietario · Gràcia, edificio 8 unidades</div>
+          <div class="test-name">Laura García</div>
+          <div class="test-role">Propietaria · Sarrià</div>
         </div>
       </div>
     </div>
     <div class="test-card fade-in d3">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"Lo que más valoro es que no me vendieron humo. Me explicaron exactamente qué esperar con la regulación actual, cuáles eran los riesgos reales y cuál era la opción óptima. Vendí mi piso en Poblenou en 6 semanas, por encima del precio de mercado."</p>
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Lo que más valoro es la tranquilidad. Vivo fuera de Barcelona y necesitaba un equipo que pudiera ocuparse absolutamente de todo. Con Volta sé que el piso está en buenas manos."</p>
       <div class="test-author">
-        <div class="test-avatar">AR</div>
+        <div class="test-avatar">MP</div>
         <div>
-          <div class="test-name">Anna Roca</div>
-          <div class="test-role">Vendedora · El Poblenou, 72 m²</div>
+          <div class="test-name">Marc Puig</div>
+          <div class="test-role">Propietario · Gràcia</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card fade-in d1">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"En menos de dos semanas encontraron un inquilino corporativo para mi apartamento. Todo el proceso fue rápido, transparente y mucho más sencillo de lo que esperaba."</p>
+      <div class="test-author">
+        <div class="test-avatar">JR</div>
+        <div>
+          <div class="test-name">Jordi Roca</div>
+          <div class="test-role">Propietario · Poblenou</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card fade-in d2">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Llevaba años gestionando personalmente mis alquileres y cada vez me quitaban más tiempo. Desde que lo lleva Volta prácticamente solo tengo que preocuparme de recibir la renta."</p>
+      <div class="test-author">
+        <div class="test-avatar">MS</div>
+        <div>
+          <div class="test-name">Marta Sánchez</div>
+          <div class="test-role">Propietaria · Sant Gervasi</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card fade-in d3">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Me asesoraron muy bien sobre la regulación del alquiler en Barcelona y las diferentes opciones que tenía como propietario. Se nota que conocen el mercado."</p>
+      <div class="test-author">
+        <div class="test-avatar">AC</div>
+        <div>
+          <div class="test-name">Albert Costa</div>
+          <div class="test-role">Propietario · Les Corts</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="4 de 5 estrellas">★★★★<span class="test-star-off">★</span></div>
+      <p class="test-text">"Muy buena experiencia en general. Buena comunicación, gestión profesional y rápidos solucionando las incidencias del inquilino."</p>
+      <div class="test-author">
+        <div class="test-avatar">EV</div>
+        <div>
+          <div class="test-name">Elena Vidal</div>
+          <div class="test-role">Propietaria · Eixample</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Tenemos varios pisos en Barcelona y buscábamos centralizar toda la gestión con un único equipo. Volta nos ha ayudado muchísimo a profesionalizar el portfolio."</p>
+      <div class="test-author">
+        <div class="test-avatar">DF</div>
+        <div>
+          <div class="test-name">David Fernández</div>
+          <div class="test-role">Propietario · Barcelona</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Me consiguieron una renta mejor de la que estaba obteniendo anteriormente y, sobre todo, un perfil de inquilino que me daba mucha más tranquilidad."</p>
+      <div class="test-author">
+        <div class="test-avatar">SÁ</div>
+        <div>
+          <div class="test-name">Sergio Álvarez</div>
+          <div class="test-role">Propietario · Diagonal Mar</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Desde la valoración inicial hasta la entrada del inquilino todo estuvo perfectamente coordinado. Fotografías, visitas, contrato, check-in… No tuve que ocuparme de nada."</p>
+      <div class="test-author">
+        <div class="test-avatar">AB</div>
+        <div>
+          <div class="test-name">Ana Bosch</div>
+          <div class="test-role">Propietaria · Vila Olímpica</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Vivo en Londres y gestionar un piso en Barcelona a distancia era complicado. Ahora tengo un equipo local que responde cuando hay cualquier problema."</p>
+      <div class="test-author">
+        <div class="test-avatar">FL</div>
+        <div>
+          <div class="test-name">Fernando López</div>
+          <div class="test-role">Propietario · Eixample Dret</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="4 de 5 estrellas">★★★★<span class="test-star-off">★</span></div>
+      <p class="test-text">"Muy satisfecho con el servicio. Me gusta especialmente que sean claros con los números y no prometan rentabilidades que luego no pueden conseguir."</p>
+      <div class="test-author">
+        <div class="test-avatar">XT</div>
+        <div>
+          <div class="test-name">Xavier Torres</div>
+          <div class="test-role">Propietario · Gràcia</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Mi piso necesitaba varios cambios antes de poder alquilarlo. Coordinaron la puesta a punto, las fotografías y la comercialización y conseguimos alquilarlo rápidamente."</p>
+      <div class="test-author">
+        <div class="test-avatar">PR</div>
+        <div>
+          <div class="test-name">Patricia Romero</div>
+          <div class="test-role">Propietaria · Sant Antoni</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Había trabajado anteriormente con otras agencias y la diferencia está en el seguimiento. En Volta realmente sientes que hay alguien pendiente de tu propiedad."</p>
+      <div class="test-author">
+        <div class="test-avatar">LM</div>
+        <div>
+          <div class="test-name">Luis Martínez</div>
+          <div class="test-role">Propietario · Sarrià-Sant Gervasi</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Tenía bastante incertidumbre con todos los cambios legislativos en Cataluña. Me explicaron qué podía hacer, qué no y cuál era la estrategia más adecuada para mi piso."</p>
+      <div class="test-author">
+        <div class="test-avatar">TC</div>
+        <div>
+          <div class="test-name">Teresa Costa</div>
+          <div class="test-role">Propietaria · Les Corts</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Gestionan dos apartamentos nuestros y la experiencia está siendo excelente. Buena ocupación, buenos perfiles y comunicación constante."</p>
+      <div class="test-author">
+        <div class="test-avatar">AP</div>
+        <div>
+          <div class="test-name">Alejandro Pérez</div>
+          <div class="test-role">Propietario · Eixample</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Encontraron una empresa interesada en alquilar el piso para uno de sus directivos. Para mí era exactamente el tipo de inquilino que estaba buscando."</p>
+      <div class="test-author">
+        <div class="test-avatar">RD</div>
+        <div>
+          <div class="test-name">Ricardo Domínguez</div>
+          <div class="test-role">Propietario · Pedralbes</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="4 de 5 estrellas">★★★★<span class="test-star-off">★</span></div>
+      <p class="test-text">"Equipo joven, rápido y muy resolutivo. Hemos tenido alguna incidencia durante el alquiler y siempre la han gestionado sin que yo tuviera que intervenir."</p>
+      <div class="test-author">
+        <div class="test-avatar">MJ</div>
+        <div>
+          <div class="test-name">Mónica Jiménez</div>
+          <div class="test-role">Propietaria · Sagrada Família</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Lo que inicialmente iba a ser simplemente una valoración terminó ayudándome a replantear completamente la estrategia de mi propiedad. Muy buen asesoramiento."</p>
+      <div class="test-author">
+        <div class="test-avatar">JN</div>
+        <div>
+          <div class="test-name">Javier Navarro</div>
+          <div class="test-role">Propietario · El Born</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Volta gestiona el piso desde hace varios meses y estoy encantada. El inquilino está contento y yo prácticamente no tengo que ocuparme de nada."</p>
+      <div class="test-author">
+        <div class="test-avatar">CH</div>
+        <div>
+          <div class="test-name">Cristina Hernández</div>
+          <div class="test-role">Propietaria · Eixample Esquerra</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Necesitaba alquilar el piso durante nueve meses antes de volver a utilizarlo personalmente. Entendieron perfectamente mi situación y encontraron una solución adaptada."</p>
+      <div class="test-author">
+        <div class="test-avatar">AG</div>
+        <div>
+          <div class="test-name">Andrés García</div>
+          <div class="test-role">Propietario · Gràcia</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Destacaría la rapidez. En pocos días hicieron las fotos, publicaron el inmueble y empezaron las visitas. Poco después ya teníamos un candidato solvente."</p>
+      <div class="test-author">
+        <div class="test-avatar">IF</div>
+        <div>
+          <div class="test-name">Isabel Fernández</div>
+          <div class="test-role">Propietaria · Poblenou</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Gestionar un edificio entero es bastante más complejo que gestionar un solo piso. El equipo nos ayudó a definir una estrategia diferente para cada unidad y mejorar la ocupación."</p>
+      <div class="test-author">
+        <div class="test-avatar">RS</div>
+        <div>
+          <div class="test-name">Ramón Sánchez</div>
+          <div class="test-role">Propietario · Eixample</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="4 de 5 estrellas">★★★★<span class="test-star-off">★</span></div>
+      <p class="test-text">"Muy buen servicio y especialmente buena atención cuando surge algún problema. Para un propietario eso es probablemente lo más importante."</p>
+      <div class="test-author">
+        <div class="test-avatar">DR</div>
+        <div>
+          <div class="test-name">Daniel Rodríguez</div>
+          <div class="test-role">Propietario · Sant Gervasi</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Tenía el piso alquilado desde hacía años por debajo de mercado y no sabía qué alternativas tenía. Analizaron mi situación y me propusieron una estrategia mucho más eficiente."</p>
+      <div class="test-author">
+        <div class="test-avatar">NM</div>
+        <div>
+          <div class="test-name">Nuria Martínez</div>
+          <div class="test-role">Propietaria · Les Corts</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Me gusta que no se limitan a publicar el piso. Analizan la propiedad, el mercado y el perfil de inquilino que tiene más sentido antes de empezar."</p>
+      <div class="test-author">
+        <div class="test-avatar">EC</div>
+        <div>
+          <div class="test-name">Eduardo Cabrera</div>
+          <div class="test-role">Propietario · Dreta de l’Eixample</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Vendimos nuestro piso con Volta después de haber intentado hacerlo con otra agencia. El posicionamiento y la forma de gestionar las visitas fueron completamente diferentes."</p>
+      <div class="test-author">
+        <div class="test-avatar">MP</div>
+        <div>
+          <div class="test-name">María Pérez</div>
+          <div class="test-role">Propietaria · Poblenou</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Tenemos propiedades en Barcelona pero vivimos fuera de España. Necesitábamos confianza y comunicación. Hasta ahora la experiencia con Volta ha sido excelente."</p>
+      <div class="test-author">
+        <div class="test-avatar">RK</div>
+        <div>
+          <div class="test-name">Robert Klein</div>
+          <div class="test-role">Propietario · Barcelona</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="4 de 5 estrellas">★★★★<span class="test-star-off">★</span></div>
+      <p class="test-text">"Buena gestión, comunicación rápida y transparencia con los gastos. Cada mes sé perfectamente cómo está funcionando la propiedad."</p>
+      <div class="test-author">
+        <div class="test-avatar">ÁE</div>
+        <div>
+          <div class="test-name">Álvaro Espinosa</div>
+          <div class="test-role">Propietario · Sant Antoni</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card test-extra">
+      <div class="test-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="test-text">"Para mí el mayor valor es haber recuperado tiempo. Antes recibía llamadas por cualquier incidencia del piso; ahora Volta se ocupa de todo y solo intervengo cuando realmente es necesario."</p>
+      <div class="test-author">
+        <div class="test-avatar">SL</div>
+        <div>
+          <div class="test-name">Sofía López</div>
+          <div class="test-role">Propietaria · Eixample</div>
         </div>
       </div>
     </div>
   </div>
+  <div class="test-more-wrap"><button type="button" class="test-more" id="testMore" aria-expanded="false">Ver los 30 testimonios</button></div>
 </section>
 
 <!-- CTA FINAL -->
@@ -1135,6 +1432,18 @@ function exportarExcel() {
   const fecha = new Date().toISOString().slice(0, 10);
   XLSX.writeFile(wb, `volta_leads_${fecha}.xlsx`);
 }
+
+// Testimonios: ver más / ver menos
+(function(){
+  var g=document.getElementById('testGrid'),b=document.getElementById('testMore');
+  if(!g||!b)return;
+  b.addEventListener('click',function(){
+    var open=g.classList.toggle('expanded');
+    b.setAttribute('aria-expanded',open);
+    b.textContent=open?'Ver menos':'Ver los 30 testimonios';
+    if(!open)document.getElementById('testimonios').scrollIntoView({behavior:'smooth'});
+  });
+})();
 </script>
 
 <!-- SheetJS: exportación a Excel -->
