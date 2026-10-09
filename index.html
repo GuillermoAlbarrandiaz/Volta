@@ -232,9 +232,10 @@ select.f-control{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://w
 /* ── INMUEBLES ── */
 .inmuebles{background:var(--gray-light)}
 .inm-sub{color:var(--gray);font-size:1rem;line-height:1.7;margin-top:.5rem}
-.inm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:3rem;max-width:1320px;margin-left:auto;margin-right:auto}
-@media(max-width:1100px){.inm-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.inm-grid{grid-template-columns:1fr}}
+.inm-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin:3rem auto 0;max-width:1240px}
+.inm-grid>.inm-card{flex:0 1 calc((100% - 3rem)/3)}
+@media(max-width:1000px){.inm-grid>.inm-card{flex-basis:calc((100% - 1.5rem)/2)}}
+@media(max-width:640px){.inm-grid>.inm-card{flex-basis:100%}}
 .inm-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.05);transition:transform .25s,box-shadow .25s}
 .inm-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.1)}
 .inm-media{position:relative;display:block;width:100%;aspect-ratio:4/5;padding:0;border:0;cursor:zoom-in;background:#ddd;overflow:hidden}
@@ -695,6 +696,19 @@ select.f-control{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://w
         <h3 class="inm-title">Piso reformado de 3 habitaciones</h3>
         <p class="inm-desc">Reforma integral en 2024. Exterior y muy luminoso, con salón-comedor abierto a la cocina y dormitorio principal con doble ventana.</p>
         <ul class="inm-feats"><li>91 m²</li><li>3 hab.</li><li>1 baño + aseo</li><li>Reformado 2024</li><li>Exterior</li><li>Ascensor</li><li>Aire acondicionado</li></ul>
+      </div>
+    </article>
+    <article class="inm-card fade-in d2" data-gallery='[&quot;inmuebles/born/01.jpg&quot;, &quot;inmuebles/born/02.jpg&quot;, &quot;inmuebles/born/03.jpg&quot;, &quot;inmuebles/born/04.jpg&quot;, &quot;inmuebles/born/05.jpg&quot;, &quot;inmuebles/born/06.jpg&quot;, &quot;inmuebles/born/07.jpg&quot;, &quot;inmuebles/born/08.jpg&quot;, &quot;inmuebles/born/09.jpg&quot;, &quot;inmuebles/born/10.jpg&quot;, &quot;inmuebles/born/11.jpg&quot;, &quot;inmuebles/born/12.jpg&quot;, &quot;inmuebles/born/13.jpg&quot;, &quot;inmuebles/born/14.jpg&quot;, &quot;inmuebles/born/15.jpg&quot;, &quot;inmuebles/born/16.jpg&quot;, &quot;inmuebles/born/17.jpg&quot;, &quot;inmuebles/born/18.jpg&quot;, &quot;inmuebles/born/19.jpg&quot;, &quot;inmuebles/born/20.jpg&quot;]' data-alts='[&quot;Salón comedor con balcón&quot;, &quot;Salón comedor&quot;, &quot;Comedor y salón&quot;, &quot;Salón&quot;, &quot;Balcón&quot;, &quot;Vistas desde el balcón&quot;, &quot;Vistas a la ciudad&quot;, &quot;Vistas al parque&quot;, &quot;Vistas desde el balcón&quot;, &quot;Salón comedor&quot;, &quot;Comedor de diario&quot;, &quot;Cocina&quot;, &quot;Pasillo&quot;, &quot;Despacho&quot;, &quot;Suite principal&quot;, &quot;Segunda suite&quot;, &quot;Tercera suite&quot;, &quot;Baño&quot;, &quot;Sala de estar&quot;, &quot;Rellano y ascensor&quot;]' data-title="Vivienda señorial frente al parque">
+      <button type="button" class="inm-media" aria-label="Ver las 20 fotos de Vivienda señorial frente al parque">
+        <img src="inmuebles/born/01.jpg" alt="Salón comedor con balcón · El Born · Ciutat Vella" loading="lazy" width="900" height="1200">
+        <span class="inm-tag">Venta</span>
+        <span class="inm-count">20 fotos</span>
+      </button>
+      <div class="inm-body">
+        <div class="inm-zone">El Born · Ciutat Vella</div>
+        <h3 class="inm-title">Vivienda señorial frente al parque</h3>
+        <p class="inm-desc">Vivienda señorial en finca clásica de 1888, con techos altos, suelos hidráulicos originales y siete balcones con vistas al Parc de la Ciutadella.</p>
+        <ul class="inm-feats"><li>192 m²</li><li>3 suites</li><li>Despacho</li><li>7 balcones</li><li>Techos altos</li><li>Ascensor</li><li>Finca de 1888</li></ul>
       </div>
     </article>
   </div>
