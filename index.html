@@ -232,7 +232,9 @@ select.f-control{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://w
 /* ── INMUEBLES ── */
 .inmuebles{background:var(--gray-light)}
 .inm-sub{color:var(--gray);font-size:1rem;line-height:1.7;margin-top:.5rem}
-.inm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,380px));justify-content:center;gap:1.5rem;margin-top:3rem}
+.inm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:3rem;max-width:1320px;margin-left:auto;margin-right:auto}
+@media(max-width:1100px){.inm-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.inm-grid{grid-template-columns:1fr}}
 .inm-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.05);transition:transform .25s,box-shadow .25s}
 .inm-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.1)}
 .inm-media{position:relative;display:block;width:100%;aspect-ratio:4/5;padding:0;border:0;cursor:zoom-in;background:#ddd;overflow:hidden}
@@ -680,6 +682,19 @@ select.f-control{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://w
         <h3 class="inm-title">Ático con terraza en el Eixample</h3>
         <p class="inm-desc">Finca de 1918 reformada, con molduras y suelo hidráulico originales. Gran terraza con cocina exterior, junto a Diagonal y Rambla de Catalunya.</p>
         <ul class="inm-feats"><li>97 m²</li><li>2 hab.</li><li>2 baños</li><li>Terraza con cocina exterior</li><li>Ascensor</li><li>Balcón</li></ul>
+      </div>
+    </article>
+    <article class="inm-card fade-in d1" data-gallery='[&quot;inmuebles/gracia/01.jpg&quot;, &quot;inmuebles/gracia/02.jpg&quot;, &quot;inmuebles/gracia/03.jpg&quot;, &quot;inmuebles/gracia/04.jpg&quot;, &quot;inmuebles/gracia/05.jpg&quot;, &quot;inmuebles/gracia/06.jpg&quot;, &quot;inmuebles/gracia/07.jpg&quot;, &quot;inmuebles/gracia/08.jpg&quot;, &quot;inmuebles/gracia/09.jpg&quot;, &quot;inmuebles/gracia/10.jpg&quot;, &quot;inmuebles/gracia/11.jpg&quot;, &quot;inmuebles/gracia/12.jpg&quot;, &quot;inmuebles/gracia/13.jpg&quot;, &quot;inmuebles/gracia/14.jpg&quot;, &quot;inmuebles/gracia/15.jpg&quot;, &quot;inmuebles/gracia/16.jpg&quot;, &quot;inmuebles/gracia/17.jpg&quot;, &quot;inmuebles/gracia/18.jpg&quot;, &quot;inmuebles/gracia/19.jpg&quot;, &quot;inmuebles/gracia/20.jpg&quot;]' data-alts='[&quot;Salón comedor con cocina abierta&quot;, &quot;Salón&quot;, &quot;Zona de estar&quot;, &quot;Comedor y cocina&quot;, &quot;Salón&quot;, &quot;Comedor&quot;, &quot;Cocina y comedor&quot;, &quot;Cocina&quot;, &quot;Cocina equipada&quot;, &quot;Lavadora y acceso al dormitorio&quot;, &quot;Dormitorio principal&quot;, &quot;Dormitorio principal&quot;, &quot;Armario empotrado&quot;, &quot;Pasillo&quot;, &quot;Tercer dormitorio&quot;, &quot;Tercer dormitorio&quot;, &quot;Segundo dormitorio&quot;, &quot;Baño completo&quot;, &quot;Aseo&quot;, &quot;Recibidor&quot;]' data-title="Piso reformado de 3 habitaciones">
+      <button type="button" class="inm-media" aria-label="Ver las 20 fotos de Piso reformado de 3 habitaciones">
+        <img src="inmuebles/gracia/01.jpg" alt="Salón comedor con cocina abierta · Gràcia" loading="lazy" width="900" height="1200">
+        <span class="inm-tag">Vendido</span>
+        <span class="inm-count">20 fotos</span>
+      </button>
+      <div class="inm-body">
+        <div class="inm-zone">Gràcia</div>
+        <h3 class="inm-title">Piso reformado de 3 habitaciones</h3>
+        <p class="inm-desc">Reforma integral en 2024. Exterior y muy luminoso, con salón-comedor abierto a la cocina y dormitorio principal con doble ventana.</p>
+        <ul class="inm-feats"><li>91 m²</li><li>3 hab.</li><li>1 baño + aseo</li><li>Reformado 2024</li><li>Exterior</li><li>Ascensor</li><li>Aire acondicionado</li></ul>
       </div>
     </article>
   </div>
