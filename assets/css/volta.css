@@ -601,3 +601,13 @@ p,.prose p,.prose li,.svc-list li,.ticks li,.compare li{font-size:1.05rem}
 .lead{color:#1f1f1f}
 p{color:#262626}
 .bg-dark p,.bg-dark .lead,.hero .lead,.svc-main p,.pillar.key p,.diff-light .pillar.key p,.tas-steps .t,.site-footer p,.bg-orange p,.bg-orange .lead{color:inherit}
+
+/* ===== Galería de ficha: foto grande + 4 (salón, cocina, dormitorio, baño y una más) ===== */
+.gallery{grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;height:clamp(380px,62vh,640px)}
+.gallery button{aspect-ratio:auto}
+.gallery button:first-child{grid-row:1/3;grid-column:auto;aspect-ratio:auto}
+@media(max-width:640px){.gallery{grid-template-columns:1fr 1fr;grid-template-rows:auto;height:auto}.gallery button,.gallery button:first-child{aspect-ratio:3/2}.gallery button:first-child{grid-column:1/3;grid-row:auto}}
+.gallery button.all{aspect-ratio:auto!important;grid-row:auto;grid-column:auto}
+/* Empresas: el título empieza a la misma altura que el párrafo */
+.corp{align-items:start}
+.corp .display{margin-top:.15em}

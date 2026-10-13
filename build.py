@@ -97,7 +97,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 <meta name="theme-color" content="#1a1a1a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/volta.css">
+<link rel="stylesheet" href="/assets/css/volta.css?v=20261013123955">
 {extra_head}{ld}
 </head>
 <body>
@@ -107,7 +107,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 </main>
 {footer()}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-<script src="/assets/js/volta.js" defer></script>
+<script src="/assets/js/volta.js?v=20261013123955" defer></script>
 </body>
 </html>
 '''
@@ -407,8 +407,11 @@ def ficha(p):
         j = pick(*keys)
         if j is not None and j not in idx: idx.append(j)
     if p.get('galeria'): idx = list(p['galeria'])
+    if len(idx) < 5:
+        extra = pick('terraza', 'piscina', 'balcón', 'vistas', 'despacho', 'comedor', 'segundo dormitorio', 'recibidor')
+        if extra is not None and extra not in idx: idx.append(extra)
     for j in range(p['fotos']):
-        if len(idx) >= 4: break
+        if len(idx) >= 5: break
         if j not in idx: idx.append(j)
     gal = ''.join(f'<button type="button" data-open="{i}" aria-label="Ampliar foto: {E(p["alts"][i])}"><img src="{foto(p, i+1, n > 0)}" alt="{E(p["alts"][i])}" {"" if n == 0 else 'loading="lazy"'}></button>' for n, i in enumerate(idx))
     lat, lon = p['mapa']; d = 0.012
