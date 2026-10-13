@@ -616,3 +616,7 @@ p{color:#262626}
 .page-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,0) 50%)}
 .page-banner .wrap{position:relative;width:100%;padding-bottom:22px}
 .page-banner .crumbs,.page-banner .crumbs a,.page-banner .crumbs span{color:#fff!important;opacity:.95}
+/* Comprar / Alquilar: menos espacio entre el texto y los filtros */
+.page-head.cat-head{padding-bottom:0;border-bottom:0}
+.section.cat-list{padding-top:0}
+.cat-list .catalog-tools{padding-top:0}

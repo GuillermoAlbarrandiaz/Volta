@@ -97,7 +97,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 <meta name="theme-color" content="#1a1a1a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/volta.css?v=1791890357">
+<link rel="stylesheet" href="/assets/css/volta.css?v=1791890951">
 {extra_head}{ld}
 </head>
 <body>
@@ -107,7 +107,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 </main>
 {footer()}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-<script src="/assets/js/volta.js?v=1791890357" defer></script>
+<script src="/assets/js/volta.js?v=1791890951" defer></script>
 </body>
 </html>
 '''
@@ -372,9 +372,9 @@ def catalog(op):
     title = 'Viviendas en <em>alquiler.</em>' if is_rent else 'Viviendas en <em>venta.</em>'
     lead = ('Pisos amueblados y preparados para entrar a vivir, en alquiler temporal y corporativo. Durante toda la estancia, el inquilino cuenta con Volta como interlocutor para cualquier necesidad.'
             if is_rent else 'Viviendas en venta en Barcelona y algunas de las operaciones que hemos acompañado. Pide información de cualquiera de ellas y te atendemos personalmente.')
-    body = f'''<section class="page-head"><div class="wrap">{crumbs(('Alquilar' if is_rent else 'Comprar', None))}
+    body = f'''<section class="page-head cat-head"><div class="wrap">{crumbs(('Alquilar' if is_rent else 'Comprar', None))}
   <div class="eyebrow">{'Alquilar' if is_rent else 'Comprar'}</div><h1 class="display">{title}</h1><p class="lead">{lead}</p></div></section>
-<section class="section tight"><div class="wrap" data-catalog>
+<section class="section tight cat-list"><div class="wrap" data-catalog>
   <div class="catalog-tools" role="search">
     <label>Zona<select data-filter="barrio"><option value="">Toda Barcelona</option>{opts}</select></label>
     <label>Habitaciones<select data-filter="hab"><option value="">Cualquiera</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option></select></label>
