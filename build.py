@@ -78,6 +78,17 @@ def footer():
   </div>
 </footer>'''
 
+def sin_punto(doc):
+    """Quita el punto final de los títulos (h1/h2/h3) de menos de 7 palabras."""
+    def fix(m):
+        inner = m.group(2)
+        txt = re.sub(r'<[^>]+>', '', inner).strip()
+        if txt.endswith('.') and not txt.endswith('..') and len(txt.split()) < 7:
+            i = inner.rfind('.')
+            inner = inner[:i] + inner[i+1:]
+        return m.group(1) + inner + m.group(3)
+    return re.sub(r'(<h[123][^>]*>)(.*?)(</h[123]>)', fix, doc, flags=re.S)
+
 def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img/og.jpg', index=True, extra_head=''):
     canonical = SITE + path
     ld = ''.join(f'<script type="application/ld+json">{json.dumps(j, ensure_ascii=False)}</script>' for j in (jsonld or []))
@@ -97,7 +108,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 <meta name="theme-color" content="#1a1a1a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/volta.css?v=1791890951">
+<link rel="stylesheet" href="/assets/css/volta.css?v=1791897867">
 {extra_head}{ld}
 </head>
 <body>
@@ -107,11 +118,12 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 </main>
 {footer()}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-<script src="/assets/js/volta.js?v=1791890951" defer></script>
+<script src="/assets/js/volta.js?v=1791897867" defer></script>
 </body>
 </html>
 '''
     doc = re.sub(r'<div class="eyebrow">.*?</div>\s*', '', doc)   # sin mini títulos sobre los apartados
+    doc = sin_punto(doc)
     doc = silabas.html(doc)                                           # guiones suaves para el texto justificado
     out = ROOT / path.lstrip('/') / 'index.html' if path.endswith('/') else ROOT / path.lstrip('/')
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -145,10 +157,10 @@ def meta(p):
     else: bits.append(next((c for c in p['caracteristicas'] if 'suite' in c), ''))
     return ''.join(f'<span>{E(b)}</span>' for b in bits if b)
 
-def card(p, cls='', thumb=True, data=False):
+def card(p, cls='', thumb=True, data=False, n=1):
     attrs = (f' data-item data-barrio="{E(p["distrito"])}" data-hab="{p["habitaciones"]}" data-estado="{p["estado"]}"' if data else '')
     return f'''<a class="prop reveal {cls}" href="{url_of(p)}"{attrs}>
-  <div class="media"><img src="{foto(p, 1, thumb)}" alt="{E(p['alts'][0])} · {E(p['titulo'])}" loading="lazy" width="900" height="675">{badge(p)}</div>
+  <div class="media"><img src="{foto(p, n, thumb)}" alt="{E(p['alts'][n-1])} · {E(p['titulo'])}" loading="lazy" width="900" height="675">{badge(p)}</div>
   <div class="info"><div class="zone">{E(p['barrio'])}</div><h3>{E(p['titulo'])}</h3>
     <div class="meta">{meta(p)}</div><span class="more">Ver propiedad</span></div>
 </a>'''
@@ -287,7 +299,7 @@ def cta_band():
 def home():
     avail = [p for p in PROPS if p['estado'] == 'disponible']
     big = next((p for p in avail if p['operacion'] == 'venta'), avail[0])
-    rest = [p for p in avail if p is not big][:2]
+    rest = [p for p in avail if p['id'] in ('piso-obra-nueva-poblenou-22', 'atico-terraza-eixample')]
     hero_alt = 'Salón con vigas de madera de un apartamento gestionado por Volta en el Gòtic'
     body = f'''
 <section class="hero" aria-labelledby="h1">
@@ -350,7 +362,7 @@ def home():
     <div><div class="eyebrow">Inmuebles</div><h2 id="p-h" class="display">Viviendas que <em>gestionamos.</em></h2></div>
     <div class="actions"><a class="link" href="/alquilar/">Ver alquileres</a><a class="link" href="/comprar/">Ver viviendas en venta</a></div>
   </div>
-  <div class="feat">{card(big, 'big', thumb=False)}<div class="stack">{''.join(card(p) for p in rest)}</div></div>
+  <div class="feat">{card(big, 'big', thumb=False)}<div class="stack">{''.join(card(p, n=7 if p['id'] == 'atico-terraza-eixample' else 1) for p in rest)}</div></div>
 </div></section>
 
 {corp_block()}
@@ -373,7 +385,8 @@ def catalog(op):
     lead = ('Pisos amueblados y preparados para entrar a vivir, en alquiler temporal y corporativo. Durante toda la estancia, el inquilino cuenta con Volta como interlocutor para cualquier necesidad.'
             if is_rent else 'Viviendas en venta en Barcelona y algunas de las operaciones que hemos acompañado. Pide información de cualquiera de ellas y te atendemos personalmente.')
     body = f'''<section class="page-head cat-head"><div class="wrap">{crumbs(('Alquilar' if is_rent else 'Comprar', None))}
-  <div class="eyebrow">{'Alquilar' if is_rent else 'Comprar'}</div><h1 class="display">{title}</h1><p class="lead">{lead}</p></div></section>
+  <div class="eyebrow">{'Alquilar' if is_rent else 'Comprar'}</div><h1 class="display">{title}</h1><p class="lead">{lead}</p>
+  <img class="cat-sellos" src="/assets/img/sellos.png" alt="Miembros de API y AICAT, agentes inmobiliarios certificados" width="1400" height="303"></div></section>
 <section class="section tight cat-list"><div class="wrap" data-catalog>
   <div class="catalog-tools" role="search">
     <label>Zona<select data-filter="barrio"><option value="">Toda Barcelona</option>{opts}</select></label>

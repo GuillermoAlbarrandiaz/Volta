@@ -620,3 +620,8 @@ p{color:#262626}
 .page-head.cat-head{padding-bottom:0;border-bottom:0}
 .section.cat-list{padding-top:0}
 .cat-list .catalog-tools{padding-top:0}
+/* Sellos API / AICAT en Comprar y Alquilar */
+.cat-head .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);column-gap:clamp(2rem,5vw,5rem);align-items:center}
+.cat-head .wrap>*{grid-column:1}
+.cat-head .cat-sellos{grid-column:2;grid-row:1 / span 3;width:100%;max-width:520px;height:auto;justify-self:end}
+@media(max-width:900px){.cat-head .wrap{display:block}.cat-head .cat-sellos{width:100%;max-width:360px;margin-top:1.4rem;display:block}}
