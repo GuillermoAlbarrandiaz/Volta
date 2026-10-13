@@ -378,7 +378,8 @@
    2,
    3,
    4
-  ]
+  ],
+  "sin_miniaturas": true
  },
  {
   "id": "vivienda-terraza-parking-vila-de-gracia",
@@ -435,6 +436,7 @@
    3,
    4,
    1
-  ]
+  ],
+  "sin_miniaturas": true
  }
 ]

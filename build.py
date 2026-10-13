@@ -26,6 +26,7 @@ def url_of(p):
     return f"/{'alquilar' if p['operacion'] == 'alquiler' else 'comprar'}/{p['id']}/"
 
 def foto(p, n=1, thumb=False):
+    if p.get('sin_miniaturas'): thumb = False
     return f"/inmuebles/{p['carpeta']}/{'t/' if thumb else ''}{n:02d}.jpg"
 
 # ───────────────────────── plantilla común ─────────────────────────
@@ -108,7 +109,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 <meta name="theme-color" content="#1a1a1a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/volta.css?v=1791900094">
+<link rel="stylesheet" href="/assets/css/volta.css?v=1791901050">
 {extra_head}{ld}
 </head>
 <body>
@@ -118,7 +119,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 </main>
 {footer()}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-<script src="/assets/js/volta.js?v=1791900094" defer></script>
+<script src="/assets/js/volta.js?v=1791901050" defer></script>
 </body>
 </html>
 '''
