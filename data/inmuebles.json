@@ -1,0 +1,308 @@
+[
+ {
+  "id": "piso-obra-nueva-poblenou-22",
+  "carpeta": "poblenou",
+  "fotos": 18,
+  "operacion": "alquiler",
+  "modalidad": "Alquiler temporal",
+  "estado": "disponible",
+  "titulo": "Piso de obra nueva en el 22@",
+  "barrio": "El Parc i la Llacuna del Poblenou",
+  "distrito": "Sant Martí",
+  "mapa": [
+   41.4012,
+   2.1935
+  ],
+  "superficie": 86,
+  "habitaciones": 2,
+  "banos": "2",
+  "resumen": "Edificio de 2022 con piscina en la azotea. Amueblado, luminoso y a pocos minutos de la playa.",
+  "descripcion": [
+   "Piso de obra nueva en el distrito 22@ de Poblenou, en un edificio construido en 2022 con piscina comunitaria en la azotea y vistas a la ciudad.",
+   "Tiene dos dormitorios y dos baños, uno de ellos en suite con el dormitorio principal. La cocina está abierta al salón-comedor y la distribución aprovecha bien la luz natural. Es exterior, está en una primera planta y se entrega totalmente amueblado.",
+   "Una zona con parques, carril bici, comercios y buen transporte público, a pocos minutos de la playa. Pensado para profesionales desplazados, parejas o familias que buscan una estancia de media duración."
+  ],
+  "caracteristicas": [
+   "86 m² construidos",
+   "2 dormitorios",
+   "2 baños (uno en suite)",
+   "1.ª planta, exterior",
+   "Ascensor",
+   "Balcón",
+   "Orientación este",
+   "Construcción de 2022"
+  ],
+  "equipamiento": [
+   "Totalmente amueblado",
+   "Cocina equipada",
+   "Aire acondicionado",
+   "Calefacción individual de gas",
+   "Armarios empotrados",
+   "Internet de alta velocidad",
+   "Piscina comunitaria"
+  ],
+  "planos": [],
+  "alts": [
+   "Piscina comunitaria con vistas a la ciudad",
+   "Comedor",
+   "Salón",
+   "Salón",
+   "Salón",
+   "Cocina equipada",
+   "Pasillo",
+   "Dormitorio principal",
+   "Dormitorio principal",
+   "Distribuidor",
+   "Baño en suite",
+   "Segundo dormitorio",
+   "Segundo dormitorio",
+   "Segundo dormitorio",
+   "Segundo baño",
+   "Plaza de parking",
+   "Piscina comunitaria en la azotea",
+   "Salón comedor con cocina abierta"
+  ]
+ },
+ {
+  "id": "apartamento-altillo-gotic",
+  "carpeta": "gotic",
+  "fotos": 18,
+  "operacion": "alquiler",
+  "modalidad": "Alquiler temporal",
+  "estado": "disponible",
+  "titulo": "Apartamento con altillo en el Gòtic",
+  "barrio": "El Gòtic",
+  "distrito": "Ciutat Vella",
+  "mapa": [
+   41.3842,
+   2.1743
+  ],
+  "superficie": 52,
+  "habitaciones": 1,
+  "banos": "1",
+  "resumen": "Finca histórica con vigas de madera y dormitorio en altillo. Reformado y amueblado, a dos pasos de Plaça Catalunya.",
+  "descripcion": [
+   "Apartamento en una finca histórica del Barri Gòtic, a pocos minutos a pie de Plaça Catalunya.",
+   "La zona de día reúne salón, cocina y baño en la planta principal, y el dormitorio se sitúa en un altillo al que se accede por una escalera. Conserva las vigas de madera y tiene un balcón exterior.",
+   "Pensado para una persona o una pareja que quiere vivir en el centro, con comercios, restaurantes y buenas conexiones de transporte a su alrededor."
+  ],
+  "caracteristicas": [
+   "52 m²",
+   "1 dormitorio en altillo",
+   "1 baño",
+   "1.ª planta, exterior",
+   "Ascensor",
+   "Balcón",
+   "Orientación sur"
+  ],
+  "equipamiento": [
+   "Amueblado",
+   "Cocina equipada con placa de inducción, horno y lavavajillas",
+   "Aire acondicionado",
+   "Calefacción eléctrica",
+   "Internet de alta velocidad"
+  ],
+  "planos": [],
+  "alts": [
+   "Salón con escalera al altillo",
+   "Salón",
+   "Mueble de salón",
+   "Vista cenital del salón",
+   "Salón comedor",
+   "Comedor",
+   "Cocina",
+   "Rincón de lectura",
+   "Dormitorio en altillo",
+   "Placa de inducción",
+   "Horno",
+   "Lavavajillas",
+   "Baño",
+   "Ducha",
+   "Recibidor",
+   "Detalle del altillo",
+   "Detalle decorativo",
+   "Detalle decorativo"
+  ]
+ },
+ {
+  "id": "atico-terraza-eixample",
+  "carpeta": "eixample",
+  "fotos": 11,
+  "operacion": "alquiler",
+  "modalidad": "Alquiler temporal",
+  "estado": "disponible",
+  "titulo": "Ático con terraza en el Eixample",
+  "barrio": "L'Antiga Esquerra de l'Eixample",
+  "distrito": "Eixample",
+  "mapa": [
+   41.3895,
+   2.1555
+  ],
+  "superficie": 97,
+  "habitaciones": 2,
+  "banos": "2",
+  "resumen": "Finca de 1918 reformada, con molduras y suelo hidráulico originales. Gran terraza con cocina exterior, junto a Diagonal y Rambla de Catalunya.",
+  "descripcion": [
+   "Ático dúplex en una finca de 1918 en L'Antiga Esquerra de l'Eixample, reformado conservando molduras y suelo hidráulico originales.",
+   "Dispone de dos dormitorios, dos baños y una amplia terraza con cocina exterior y zona de estar. Se entrega amueblado y con cocina equipada.",
+   "A pocos minutos de Diagonal, Passeig de Gràcia y Rambla de Catalunya, con metro, FGC y autobús cerca. Pensado para estancias de media duración."
+  ],
+  "caracteristicas": [
+   "97 m²",
+   "2 dormitorios",
+   "2 baños",
+   "Dúplex en 4.ª planta, exterior",
+   "Ascensor",
+   "Terraza y balcón",
+   "Orientación sur",
+   "Finca de 1918"
+  ],
+  "equipamiento": [
+   "Totalmente amueblado",
+   "Cocina equipada",
+   "Cocina exterior en la terraza",
+   "Aire acondicionado",
+   "Calefacción individual de gas",
+   "Armarios empotrados",
+   "Internet de alta velocidad"
+  ],
+  "planos": [],
+  "alts": [
+   "Salón",
+   "Comedor en la galería",
+   "Librería del salón",
+   "Terraza con cocina exterior",
+   "Salón y cocina",
+   "Cocina equipada",
+   "Dormitorio principal",
+   "Baño",
+   "Segundo dormitorio",
+   "Segundo baño",
+   "Balcón"
+  ]
+ },
+ {
+  "id": "piso-reformado-gracia",
+  "carpeta": "gracia",
+  "fotos": 20,
+  "operacion": "venta",
+  "modalidad": "Compraventa",
+  "estado": "vendido",
+  "titulo": "Piso reformado de 3 habitaciones",
+  "barrio": "Gràcia",
+  "distrito": "Gràcia",
+  "mapa": [
+   41.4036,
+   2.157
+  ],
+  "superficie": 91,
+  "habitaciones": 3,
+  "banos": "1 + aseo",
+  "resumen": "Reforma integral en 2024. Exterior y muy luminoso, con salón-comedor abierto a la cocina y dormitorio principal con doble ventana.",
+  "descripcion": [
+   "Piso de tres habitaciones reformado íntegramente en 2024, exterior y muy luminoso.",
+   "El salón-comedor se abre a la cocina y el dormitorio principal tiene doble ventana. Cuenta con un baño completo y un aseo, aire acondicionado y calefacción.",
+   "Volta acompañó a los propietarios durante toda la comercialización hasta la firma de la operación."
+  ],
+  "caracteristicas": [
+   "91 m²",
+   "3 dormitorios",
+   "1 baño completo + 1 aseo",
+   "3.ª planta, exterior",
+   "Ascensor",
+   "Orientación este",
+   "Reformado en 2024"
+  ],
+  "equipamiento": [
+   "Aire acondicionado",
+   "Calefacción",
+   "Cocina equipada",
+   "Armario empotrado"
+  ],
+  "planos": [],
+  "alts": [
+   "Salón comedor con cocina abierta",
+   "Salón",
+   "Zona de estar",
+   "Comedor y cocina",
+   "Salón",
+   "Comedor",
+   "Cocina y comedor",
+   "Cocina",
+   "Cocina equipada",
+   "Lavadora y acceso al dormitorio",
+   "Dormitorio principal",
+   "Dormitorio principal",
+   "Armario empotrado",
+   "Pasillo",
+   "Tercer dormitorio",
+   "Tercer dormitorio",
+   "Segundo dormitorio",
+   "Baño completo",
+   "Aseo",
+   "Recibidor"
+  ]
+ },
+ {
+  "id": "vivienda-senorial-born",
+  "carpeta": "born",
+  "fotos": 20,
+  "operacion": "venta",
+  "modalidad": "Compraventa",
+  "estado": "disponible",
+  "titulo": "Vivienda señorial frente al parque",
+  "barrio": "El Born",
+  "distrito": "Ciutat Vella",
+  "mapa": [
+   41.387,
+   2.183
+  ],
+  "superficie": 192,
+  "habitaciones": 3,
+  "banos": null,
+  "resumen": "Vivienda señorial en finca clásica de 1888, con techos altos, suelos hidráulicos originales y siete balcones con vistas al Parc de la Ciutadella.",
+  "descripcion": [
+   "Vivienda señorial en una elegante finca clásica construida en 1888, junto al Born y frente al Parc de la Ciutadella, uno de los espacios verdes más emblemáticos de Barcelona.",
+   "Destaca por su carácter, su amplitud y su luminosidad: techos altos y siete balcones que aportan luz natural y una conexión excepcional con el entorno, con vistas abiertas al parque.",
+   "Se distribuye en tres amplias suites, que dan privacidad y comodidad a cada habitación, y un despacho independiente que puede funcionar como espacio de trabajo, biblioteca o habitación adicional.",
+   "Rodeada de algunos de los enclaves culturales, gastronómicos y arquitectónicos más representativos de la ciudad, a pocos minutos del centro histórico y con excelentes conexiones con el resto de Barcelona."
+  ],
+  "caracteristicas": [
+   "192 m²",
+   "3 suites",
+   "Despacho independiente",
+   "7 balcones",
+   "Techos altos",
+   "Ascensor",
+   "Finca de 1888"
+  ],
+  "equipamiento": [
+   "Suelos hidráulicos originales",
+   "Molduras y elementos de arquitectura clásica",
+   "Vistas al Parc de la Ciutadella"
+  ],
+  "planos": [],
+  "alts": [
+   "Salón comedor con balcón",
+   "Salón comedor",
+   "Comedor y salón",
+   "Salón",
+   "Balcón",
+   "Vistas desde el balcón",
+   "Vistas a la ciudad",
+   "Vistas al parque",
+   "Vistas desde el balcón",
+   "Salón comedor",
+   "Comedor de diario",
+   "Cocina",
+   "Pasillo",
+   "Despacho",
+   "Suite principal",
+   "Segunda suite",
+   "Tercera suite",
+   "Baño",
+   "Sala de estar",
+   "Rellano y ascensor"
+  ]
+ }
+]
