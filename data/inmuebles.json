@@ -318,5 +318,123 @@
    "Sala de estar",
    "Rellano y ascensor"
   ]
+ },
+ {
+  "id": "obra-nueva-terraza-parking-poblenou",
+  "carpeta": "poblenou-terraza",
+  "fotos": 12,
+  "operacion": "venta",
+  "modalidad": "Compraventa",
+  "estado": "disponible",
+  "titulo": "Obra nueva con terraza y parking en Poblenou",
+  "barrio": "Poblenou",
+  "distrito": "Sant Martí",
+  "mapa": [
+   41.4005,
+   2.1945
+  ],
+  "superficie": 87,
+  "habitaciones": 2,
+  "banos": "2",
+  "resumen": "Vivienda de obra nueva de 87 m² con dos habitaciones dobles, dos baños completos, terraza privada, suelo radiante y refrescante y plaza de parking en la finca.",
+  "descripcion": [
+   "Vivienda de 87 m² en una finca de obra nueva en pleno Poblenou, uno de los barrios más atractivos y con mayor proyección de Barcelona. Destaca por su diseño contemporáneo, sus acabados de alta calidad y una distribución funcional pensada para el máximo confort.",
+   "Dispone de dos amplias habitaciones dobles y dos baños completos, con espacios cómodos y versátiles, ideales para parejas, familias o profesionales que buscan una vivienda moderna en una ubicación privilegiada.",
+   "Uno de sus principales atractivos es la terraza privada, un espacio exterior perfecto para disfrutar del clima mediterráneo. La vivienda incorpora climatización por suelo radiante y refrescante, que regula la temperatura en invierno y en verano con un confort uniforme y una mayor eficiencia energética, y cuenta con plaza de aparcamiento en la misma finca.",
+   "Poblenou combina su pasado industrial con una transformación urbanística que lo ha convertido en un referente de modernidad y calidad de vida, con restaurantes, comercios, centros deportivos, espacios verdes y buena conexión en transporte público. La proximidad al distrito 22@, la Rambla del Poblenou y las playas la hace atractiva tanto para vivir como para invertir."
+  ],
+  "caracteristicas": [
+   "87 m²",
+   "2 habitaciones dobles",
+   "2 baños completos",
+   "Terraza privada",
+   "Plaza de parking en la finca",
+   "Obra nueva"
+  ],
+  "equipamiento": [
+   "Suelo radiante y refrescante",
+   "Cocina equipada con electrodomésticos integrados",
+   "Armarios empotrados",
+   "Acabados de alta calidad"
+  ],
+  "planos": [],
+  "alts": [
+   "Salón",
+   "Cocina equipada",
+   "Dormitorio principal",
+   "Baño",
+   "Terraza privada",
+   "Terraza con jardín vertical",
+   "Cocina con hornos integrados",
+   "Segundo dormitorio",
+   "Recibidor y dormitorio",
+   "Pasillo",
+   "Pasillo distribuidor",
+   "Recibidor"
+  ],
+  "galeria": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": "vivienda-terraza-parking-vila-de-gracia",
+  "carpeta": "gracia-terraza",
+  "fotos": 12,
+  "operacion": "venta",
+  "modalidad": "Compraventa",
+  "estado": "disponible",
+  "titulo": "Vivienda con terraza y parking en Vila de Gràcia",
+  "barrio": "Vila de Gràcia",
+  "distrito": "Gràcia",
+  "mapa": [
+   41.403,
+   2.157
+  ],
+  "superficie": 125,
+  "habitaciones": 3,
+  "banos": "2",
+  "resumen": "Vivienda de 125 m² en finca de 1935 con tres habitaciones, dos baños completos, terraza privada con vistas a zona verde y plaza de parking en la finca.",
+  "descripcion": [
+   "Vivienda de 125 m² en el corazón de Vila de Gràcia, uno de los barrios más emblemáticos, auténticos y demandados de Barcelona. Ubicada en una finca construida en 1935, combina el encanto de la arquitectura tradicional barcelonesa con la amplitud y comodidad de sus espacios.",
+   "Dispone de tres habitaciones y dos baños completos, con una distribución funcional que aprovecha al máximo su superficie. Sus generosas dimensiones ofrecen múltiples posibilidades de adaptación, tanto para familias como para quienes necesitan un despacho o un espacio adicional de trabajo.",
+   "Uno de sus principales atractivos es la terraza privada con vistas a una zona verde, un espacio exterior tranquilo y despejado en pleno centro de Barcelona. Además, cuenta con plaza de aparcamiento en la misma finca, un valor añadido en un barrio tan céntrico y consolidado.",
+   "Vila de Gràcia destaca por sus calles llenas de vida, sus plazas, su arquitectura tradicional y su oferta gastronómica y cultural, con mercados, comercios de proximidad, colegios y todo tipo de servicios. Permite acceder cómodamente a Passeig de Gràcia, la avenida Diagonal y el Passeig de Sant Joan, con buenas conexiones de transporte público."
+  ],
+  "caracteristicas": [
+   "125 m²",
+   "3 habitaciones",
+   "2 baños completos",
+   "Terraza privada",
+   "Vistas a zona verde",
+   "Plaza de parking en la finca",
+   "Finca de 1935"
+  ],
+  "equipamiento": [],
+  "planos": [],
+  "alts": [
+   "Salón con salida a la terraza",
+   "Comedor",
+   "Cocina con office",
+   "Dormitorio principal",
+   "Baño completo",
+   "Dormitorio principal con armario",
+   "Segundo dormitorio",
+   "Tercer dormitorio",
+   "Segundo baño",
+   "Segundo dormitorio con armario",
+   "Pasillo",
+   "Recibidor"
+  ],
+  "galeria": [
+   0,
+   2,
+   3,
+   4,
+   1
+  ]
  }
 ]

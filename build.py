@@ -108,7 +108,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 <meta name="theme-color" content="#1a1a1a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/volta.css?v=1791897867">
+<link rel="stylesheet" href="/assets/css/volta.css?v=1791900094">
 {extra_head}{ld}
 </head>
 <body>
@@ -118,7 +118,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 </main>
 {footer()}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-<script src="/assets/js/volta.js?v=1791897867" defer></script>
+<script src="/assets/js/volta.js?v=1791900094" defer></script>
 </body>
 </html>
 '''
@@ -153,7 +153,9 @@ def badge(p):
 
 def meta(p):
     bits = [f"{p['superficie']} m²", f"{p['habitaciones']} hab."]
-    if p.get('banos'): bits.append(f"{p['banos']} {'baño' if p['banos'] == '1' else 'baños'}")
+    b = str(p.get('banos') or '')
+    if b.isdigit(): bits.append(f"{b} {'baño' if b == '1' else 'baños'}")
+    elif b: bits.append(re.sub(r'^1\b', '1 baño', b))
     else: bits.append(next((c for c in p['caracteristicas'] if 'suite' in c), ''))
     return ''.join(f'<span>{E(b)}</span>' for b in bits if b)
 
@@ -454,7 +456,7 @@ def ficha(p):
       <div class="facts"><div><small>Superficie</small><b>{p['superficie']} m²</b></div><div><small>Habitaciones</small><b>{p['habitaciones']}</b></div>{banos_fact}<div><small>Operación</small><b>{E(op_label)}</b></div></div>
       <div class="prose">{''.join(f'<p>{E(x)}</p>' for x in p['descripcion'])}</div>
       <div class="block"><h2>Características</h2><ul class="ticks">{''.join(f'<li>{E(x)}</li>' for x in p['caracteristicas'])}</ul></div>
-      <div class="block"><h2>Equipamiento</h2><ul class="ticks">{''.join(f'<li>{E(x)}</li>' for x in p['equipamiento'])}</ul></div>
+      {('<div class="block"><h2>Equipamiento</h2><ul class="ticks">' + ''.join(f'<li>{E(x)}</li>' for x in p['equipamiento']) + '</ul></div>') if p.get('equipamiento') else ''}
       <div class="block"><h2>{'Servicios Volta durante la estancia' if is_rent else 'Cómo te acompañamos'}</h2><ul class="ticks">{''.join(f'<li>{E(x)}</li>' for x in services)}</ul></div>
       {planos}
       <div class="block"><h2>Ubicación</h2>
