@@ -625,3 +625,11 @@ p{color:#262626}
 .cat-head .wrap>*{grid-column:1}
 .cat-head .cat-sellos{grid-column:2;grid-row:1 / span 3;width:100%;max-width:520px;height:auto;justify-self:end}
 @media(max-width:900px){.cat-head .wrap{display:block}.cat-head .cat-sellos{width:100%;max-width:360px;margin-top:1.4rem;display:block}}
+/* Móvil: "Tu inquilino nos llama" en una columna, foto entre título y texto */
+@media(max-width:960px){
+  .diff-top{grid-template-columns:1fr;gap:0}
+  .diff-top>div{display:contents}
+  .diff-top .diff-quote{order:1;max-width:none}
+  .diff-top .diff-photo{order:2;margin-top:2rem;aspect-ratio:4/3}
+  .diff-top .lead{order:3}
+}
