@@ -396,7 +396,21 @@ def ficha(p):
     path = url_of(p)
     is_rent = p['operacion'] == 'alquiler'
     fotos = [foto(p, n) for n in range(1, p['fotos'] + 1)]
-    gal = ''.join(f'<button type="button" data-open="{i}" aria-label="Ampliar foto {i+1}: {E(p["alts"][i])}"><img src="{foto(p, i+1, i > 0)}" alt="{E(p["alts"][i])}" {"" if i == 0 else "loading=\"lazy\""}></button>' for i in range(min(5, p['fotos'])))
+    def pick(*keys):
+        for k in keys:
+            for j, a in enumerate(p['alts']):
+                if a.lower().startswith(k):
+                    return j
+        return None
+    idx = []
+    for keys in (('salón', 'sala', 'comedor'), ('cocina',), ('dormitorio', 'suite', 'tercer dormitorio', 'segundo dormitorio'), ('baño', 'aseo')):
+        j = pick(*keys)
+        if j is not None and j not in idx: idx.append(j)
+    if p.get('galeria'): idx = list(p['galeria'])
+    for j in range(p['fotos']):
+        if len(idx) >= 4: break
+        if j not in idx: idx.append(j)
+    gal = ''.join(f'<button type="button" data-open="{i}" aria-label="Ampliar foto: {E(p["alts"][i])}"><img src="{foto(p, i+1, n > 0)}" alt="{E(p["alts"][i])}" {"" if n == 0 else 'loading="lazy"'}></button>' for n, i in enumerate(idx))
     lat, lon = p['mapa']; d = 0.012
     bbox = f'{lon-d*1.6:.4f}%2C{lat-d:.4f}%2C{lon+d*1.6:.4f}%2C{lat+d:.4f}'
     services = (['Atención directa al inquilino durante toda la estancia', 'Gestión de incidencias', 'Mantenimiento con equipo propio', 'Limpiezas coordinadas', 'Check-in y check-out', 'Supervisión de la vivienda']

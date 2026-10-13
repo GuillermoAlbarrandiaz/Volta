@@ -10,9 +10,16 @@
 
   /* ── Cabecera sobre el hero ── */
   var header = $('.site-header');
-  if (header && header.classList.contains('overlay')) {
-    var onScroll = function () { header.classList.toggle('solid', window.scrollY > 40); };
-    onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+  if (header) {
+    var onScroll = function () {
+      if (header.classList.contains('overlay')) header.classList.toggle('solid', window.scrollY > 40);
+      var y = header.getBoundingClientRect().bottom + 1, x = window.innerWidth / 2, under = null;
+      var els = document.elementsFromPoint ? document.elementsFromPoint(x, y) : [];
+      for (var i = 0; i < els.length; i++) { if (!header.contains(els[i])) { under = els[i]; break; } }
+      var orange = !!(under && under.closest && under.closest('.bg-orange, .doors'));
+      header.classList.toggle('on-orange', orange && (!header.classList.contains('overlay') || header.classList.contains('solid')));
+    };
+    onScroll(); window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onScroll);
   }
 
   /* ── Desplegable "Propietarios" (teclado y táctil) ── */

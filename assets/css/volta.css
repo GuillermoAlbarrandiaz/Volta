@@ -576,3 +576,28 @@ p,.prose p,.prose li,.svc-list li,.ticks li,.compare li{font-size:1.05rem}
 @media(max-width:960px){.hero-badges{display:none}}
 /* Logos portada: 3,5 cm más a la derecha (sin salirse de la pantalla) */
 .hero-badges img{margin-right:calc(-1 * min(3.5cm, var(--gut) + max(0px, (100vw - var(--wrap)) / 2) - 20px))}
+
+/* ===== Galería de ficha: salón, cocina, dormitorio y baño (2×2) ===== */
+.gallery{grid-template-columns:1fr 1fr;grid-template-rows:none;height:auto}
+.gallery button,.gallery button:first-child{grid-row:auto;grid-column:auto;aspect-ratio:3/2;display:block}
+@media(max-width:640px){.gallery{height:auto;gap:6px}.gallery button:first-child{grid-column:auto;grid-row:auto}.gallery button:nth-child(n+4):not(.all){display:block}}
+
+/* ===== Barra de navegación naranja (azul sobre apartados naranjas) ===== */
+.site-header,.site-header.overlay.solid{background:var(--orange);border-color:transparent;color:#fff}
+.site-header .logo{color:#fff}
+.site-header .logo span{color:var(--dark)}
+.site-header .nav>a:after,.site-header .dd>button:after{background:#fff}
+.site-header .header-cta{border-color:rgba(255,255,255,.35)}
+.site-header .header-cta:hover{color:var(--dark)}
+.site-header.overlay:not(.solid){background:transparent;border-color:var(--line-dark)}
+.site-header.overlay:not(.solid) .logo span{color:var(--orange)}
+.site-header.on-orange,.site-header.overlay.solid.on-orange{background:#0651bb}
+.site-header.on-orange .logo span{color:var(--orange)}
+.site-header.on-orange .header-cta:hover{color:var(--orange)}
+.site-header{transition:background .25s}
+
+/* ===== Empresas: título centrado con el párrafo; texto más oscuro ===== */
+.corp{align-items:center}
+.lead{color:#1f1f1f}
+p{color:#262626}
+.bg-dark p,.bg-dark .lead,.hero .lead,.svc-main p,.pillar.key p,.diff-light .pillar.key p,.tas-steps .t,.site-footer p,.bg-orange p,.bg-orange .lead{color:inherit}
