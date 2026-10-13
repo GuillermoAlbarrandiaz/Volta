@@ -611,3 +611,8 @@ p{color:#262626}
 /* Empresas: el título empieza a la misma altura que el párrafo */
 .corp{align-items:start}
 .corp .display{margin-top:.15em}
+/* Banner de imagen (Valorar) */
+.page-banner{position:relative;min-height:clamp(260px,46vh,520px);background-size:cover;background-position:center 40%;display:flex;align-items:flex-end}
+.page-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,0) 50%)}
+.page-banner .wrap{position:relative;width:100%;padding-bottom:22px}
+.page-banner .crumbs,.page-banner .crumbs a,.page-banner .crumbs span{color:#fff!important;opacity:.95}

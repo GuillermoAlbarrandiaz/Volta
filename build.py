@@ -97,7 +97,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 <meta name="theme-color" content="#1a1a1a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/volta.css?v=20261013123955">
+<link rel="stylesheet" href="/assets/css/volta.css?v=1791890357">
 {extra_head}{ld}
 </head>
 <body>
@@ -107,7 +107,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 </main>
 {footer()}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-<script src="/assets/js/volta.js?v=20261013123955" defer></script>
+<script src="/assets/js/volta.js?v=1791890357" defer></script>
 </body>
 </html>
 '''
@@ -479,7 +479,7 @@ def gestion():
   <h1 class="display">Mucho más que alquilar tu propiedad. <em>Nos encargamos de todo.</em></h1>
   <p class="lead" style="margin-top:1.4rem">Encontramos al inquilino adecuado y gestionamos todo lo que viene después. Desde la atención diaria hasta el mantenimiento y la resolución de incidencias, nuestro equipo cuida de tu propiedad durante toda la estancia.</p>
   <div class="actions" style="margin-top:2rem"><a class="btn btn-primary" href="#solicitud">Quiero que gestionéis mi piso</a><a class="link" href="/propietarios/valorar/">Valorar mi vivienda</a></div></div>
-  <div class="img" style="background-image:url(/inmuebles/poblenou/03.jpg)" role="img" aria-label="Salón de un piso gestionado por Volta en Poblenou"></div></section>
+  <div class="img" style="background-image:url(/assets/img/gestion.jpg)" role="img" aria-label="Salón luminoso con balcón en un piso del Eixample de Barcelona"></div></section>
 
 <section class="section diff-light bg-light"><div class="wrap">
   <div class="eyebrow">Cómo cambia tu día a día</div>
@@ -526,7 +526,7 @@ def vender():
   <h1 class="display">Vender con criterio, <em>de principio a fin.</em></h1>
   <p class="lead" style="margin-top:1.4rem">Te ayudamos a vender tu vivienda en Barcelona con una estrategia clara, una buena presentación del inmueble y un acompañamiento cercano hasta la firma.</p>
   <div class="actions" style="margin-top:2rem"><a class="btn btn-primary" href="#solicitud">Quiero vender</a><a class="link" href="/propietarios/valorar/">Valorar mi vivienda</a></div></div>
-  <div class="img" style="background-image:url(/inmuebles/born/05.jpg)" role="img" aria-label="Balcón de una vivienda señorial en venta en El Born"></div></section>
+  <div class="img" style="background-image:url(/assets/img/vender.jpg)" role="img" aria-label="Salón con balcón abierto y suelo hidráulico en Barcelona"></div></section>
 <section class="section"><div class="wrap"><div class="eyebrow">El proceso</div><h2 class="display">Cómo vendemos <em>tu vivienda.</em></h2>
   <div class="steps">{''.join(f'<div class="step reveal"><h3>{t}</h3><p>{d}</p></div>' for t, d in steps)}</div></div></section>
 <section class="section bg-light"><div class="wrap"><div class="eyebrow">Operaciones</div><h2 class="display">Viviendas que hemos <em>comercializado.</em></h2>
@@ -539,7 +539,7 @@ def vender():
 
 def valorar():
     path = '/propietarios/valorar/'
-    body = f'''<section class="page-head"><div class="wrap">{crumbs(('Propietarios', None), ('Valora tu inmueble', None))}</div></section>
+    body = f'''<section class="page-banner" role="img" aria-label="Vista de Barcelona desde el Park Güell" style="background-image:url(/assets/img/valorar.jpg)"><div class="wrap">{crumbs(('Propietarios', None), ('Valora tu inmueble', None))}</div></section>
 <section class="section bg-orange"><div class="wrap">{tasador('h1')}</div></section>
 <section class="section bg-light"><div class="wrap split">
   <div><div class="eyebrow">Vender o alquilar</div><h2 class="display">Una decisión <em>con datos.</em></h2></div>
@@ -554,7 +554,7 @@ def nosotros():
     body = f'''<section class="page-hero"><div class="txt">{crumbs(('Nosotros', None))}
   <div class="eyebrow">Nosotros</div><h1 class="display">Cuidamos viviendas <em>en Barcelona.</em></h1>
   <p class="lead" style="margin-top:1.4rem">Volta es una empresa especializada en gestión integral de propiedades, alquiler temporal, alquiler corporativo y comercialización inmobiliaria en Barcelona.</p></div>
-  <div class="img" style="background-image:url(/inmuebles/born/08.jpg)" role="img" aria-label="Vistas desde una vivienda comercializada por Volta"></div></section>
+  <div class="img" style="background-image:url(/assets/img/nosotros.jpg)" role="img" aria-label="Recinto modernista de Sant Pau y vistas de Barcelona hasta el Tibidabo"></div></section>
 <section class="section"><div class="wrap split">
   <div><div class="eyebrow">Nuestro modelo</div><h2 class="display">Dos actividades, <em>un mismo equipo.</em></h2></div>
   <div class="prose">
@@ -578,9 +578,10 @@ def nosotros():
 
 def contacto():
     path = '/contacto/'
-    body = f'''<section class="page-head"><div class="wrap">{crumbs(('Contacto', None))}
+    body = f'''<section class="page-hero"><div class="txt">{crumbs(('Contacto', None))}
   <div class="eyebrow">Contacto</div><h1 class="display">Hablemos de <em>tu vivienda.</em></h1>
-  <p class="lead">Escríbenos, llámanos o mándanos un WhatsApp. Te responde una persona del equipo.</p></div></section>
+  <p class="lead" style="margin-top:1.4rem">Escríbenos, llámanos o mándanos un WhatsApp. Te responde una persona del equipo.</p></div>
+  <div class="img" style="background-image:url(/assets/img/contacto.jpg)" role="img" aria-label="Asesora de Volta atendiendo a un propietario"></div></section>
 <section class="section"><div class="wrap contact-grid">
   <div class="contact-list">
     <a href="{TEL_LINK}"><small>Teléfono</small><b>{TEL}</b></a>
