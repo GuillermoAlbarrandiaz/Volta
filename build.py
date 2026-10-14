@@ -90,7 +90,7 @@ def sin_punto(doc):
         return m.group(1) + inner + m.group(3)
     return re.sub(r'(<h[123][^>]*>)(.*?)(</h[123]>)', fix, doc, flags=re.S)
 
-def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img/og.jpg', index=True, extra_head=''):
+def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img/og-volta.jpg', index=True, extra_head=''):
     canonical = SITE + path
     ld = ''.join(f'<script type="application/ld+json">{json.dumps(j, ensure_ascii=False)}</script>' for j in (jsonld or []))
     doc = f'''<!doctype html>
@@ -109,7 +109,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 <meta name="theme-color" content="#1a1a1a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/volta.css?v=1791903389">
+<link rel="stylesheet" href="/assets/css/volta.css?v=1791980866">
 {extra_head}{ld}
 </head>
 <body>
@@ -119,7 +119,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 </main>
 {footer()}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-<script src="/assets/js/volta.js?v=1791903389" defer></script>
+<script src="/assets/js/volta.js?v=1791980866" defer></script>
 </body>
 </html>
 '''
