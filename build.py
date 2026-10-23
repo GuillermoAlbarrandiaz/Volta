@@ -32,6 +32,8 @@ def foto(p, n=1, thumb=False):
 # ───────────────────────── plantilla común ─────────────────────────
 NAV = [('Comprar', '/comprar/'), ('Alquilar', '/alquilar/')]
 OWN = [('Gestión integral de alquileres', 'Nos ocupamos del día a día', '/propietarios/gestion-integral/'),
+       ('Alquiler de temporada', 'Gestión adaptada a la Ley 11/2025', '/propietarios/alquiler-temporada/'),
+       ('Alquiler corporativo', 'Contratos directos con empresas', '/propietarios/alquiler-corporativo/'),
        ('Vende tu propiedad', 'Comercialización y venta', '/propietarios/vender/'),
        ('Valora tu inmueble', 'Estimación orientativa', '/propietarios/valorar/')]
 
@@ -72,7 +74,7 @@ def footer():
         <p><a href="mailto:{EMAIL}">{EMAIL}</a><br><a href="{TEL_LINK}">{TEL}</a></p></div>
       <div><h4>Inmuebles</h4><ul><li><a href="/alquilar/">Alquilar</a></li><li><a href="/comprar/">Comprar</a></li></ul></div>
       <div><h4>Propietarios</h4><ul>{''.join(f'<li><a href="{h}">{t}</a></li>' for t, s, h in OWN)}</ul></div>
-      <div><h4>Volta</h4><ul><li><a href="/nosotros/">Nosotros</a></li><li><a href="/opiniones/">Opiniones</a></li><li><a href="/contacto/">Contacto</a></li></ul></div>
+      <div><h4>Volta</h4><ul><li><a href="/nosotros/">Nosotros</a></li><li><a href="/opiniones/">Opiniones</a></li><li><a href="/contacto/">Contacto</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li></ul></div>
     </div>
     <div class="foot-bottom"><span>© {YEAR} Volta BCN · Barcelona</span>
       <nav aria-label="Legal"><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Política de privacidad</a><a href="/cookies/">Política de cookies</a></nav></div>
@@ -90,11 +92,11 @@ def sin_punto(doc):
         return m.group(1) + inner + m.group(3)
     return re.sub(r'(<h[123][^>]*>)(.*?)(</h[123]>)', fix, doc, flags=re.S)
 
-def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img/og-volta.jpg', index=True, extra_head=''):
+def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img/og-volta.jpg', index=True, extra_head='', lang='es'):
     canonical = SITE + path
     ld = ''.join(f'<script type="application/ld+json">{json.dumps(j, ensure_ascii=False)}</script>' for j in (jsonld or []))
     doc = f'''<!doctype html>
-<html lang="es">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -102,14 +104,14 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 <meta name="description" content="{E(desc)}">
 {'<meta name="robots" content="noindex,follow">' if not index else ''}
 <link rel="canonical" href="{canonical}">
-<meta property="og:type" content="website"><meta property="og:locale" content="es_ES"><meta property="og:site_name" content="Volta BCN">
+<meta property="og:type" content="website"><meta property="og:locale" content="{'en_GB' if lang == 'en' else 'es_ES'}"><meta property="og:site_name" content="Volta BCN">
 <meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}">
 <meta property="og:url" content="{canonical}"><meta property="og:image" content="{SITE}{image}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1a1a1a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/volta.css?v=1791980866">
+<link rel="stylesheet" href="/assets/css/volta.css?v=1793000000">
 {extra_head}{ld}
 </head>
 <body>
@@ -119,13 +121,14 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 </main>
 {footer()}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-<script src="/assets/js/volta.js?v=1791980866" defer></script>
+<script src="/assets/js/volta.js?v=1793000000" defer></script>
 </body>
 </html>
 '''
     doc = re.sub(r'<div class="eyebrow">.*?</div>\s*', '', doc)   # sin mini títulos sobre los apartados
     doc = sin_punto(doc)
-    doc = silabas.html(doc)                                           # guiones suaves para el texto justificado
+    if lang == 'es':
+        doc = silabas.html(doc)                                       # guiones suaves para el texto justificado
     out = ROOT / path.lstrip('/') / 'index.html' if path.endswith('/') else ROOT / path.lstrip('/')
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(doc, encoding='utf-8')
@@ -141,9 +144,30 @@ def breadcrumb_ld(*items):
     return {"@context": "https://schema.org", "@type": "BreadcrumbList",
             "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": n, "item": SITE + h} for i, (n, h) in enumerate(lst)]}
 
-ORG = {"@context": "https://schema.org", "@type": "RealEstateAgent", "name": "Volta BCN", "url": SITE + "/",
-       "email": EMAIL, "telephone": TEL.replace(' ', ''), "areaServed": {"@type": "City", "name": "Barcelona"},
-       "description": "Gestión integral de propiedades, alquiler temporal y corporativo y compraventa de viviendas en Barcelona."}
+ORG = {"@context": "https://schema.org", "@type": "RealEstateAgent", "@id": SITE + "/#organizacion", "name": "Volta BCN",
+       "alternateName": "Volta", "url": SITE + "/", "logo": SITE + "/assets/img/favicon.svg", "image": SITE + "/assets/img/og-volta.jpg",
+       "email": EMAIL, "telephone": TEL.replace(' ', ''),
+       "areaServed": [{"@type": "City", "name": "Barcelona"}] + [{"@type": "Place", "name": f"{d}, Barcelona"} for d in
+                     ('Eixample', 'Gràcia', 'Sarrià-Sant Gervasi', 'Les Corts', 'Sant Martí', 'Sants-Montjuïc', 'Horta-Guinardó', 'Ciutat Vella', 'Sant Andreu', 'Nou Barris')],
+       "address": {"@type": "PostalAddress", "addressLocality": "Barcelona", "addressRegion": "Cataluña", "addressCountry": "ES"},
+       "memberOf": [{"@type": "Organization", "name": "API – Agents de la Propietat Immobiliària"}, {"@type": "Organization", "name": "AICAT – Agents Immobiliaris de Catalunya"}],
+       "knowsAbout": ["Gestión integral de alquileres", "Alquiler de temporada", "Alquiler corporativo", "Property management", "Compraventa de viviendas"],
+       "description": "Gestión integral de propiedades, alquiler de temporada y corporativo y compraventa de viviendas en Barcelona.",
+       # Cuando tengas el Perfil de Empresa de Google, LinkedIn o Instagram, añade sus URL aquí:
+       "sameAs": []}
+ORG = {k: v for k, v in ORG.items() if v != []}
+WEBSITE = {"@context": "https://schema.org", "@type": "WebSite", "@id": SITE + "/#web", "name": "Volta BCN", "url": SITE + "/",
+           "inLanguage": "es-ES", "publisher": {"@id": SITE + "/#organizacion"}}
+
+def faq_ld(qas):
+    return {"@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qas]}
+
+def faq_block(qas, title='Preguntas <em>frecuentes.</em>', eyebrow='Dudas habituales'):
+    items = ''.join(f'<details class="faq-item"><summary>{E(q)}</summary><p>{E(a)}</p></details>' for q, a in qas)
+    return f'''<section class="section" aria-labelledby="faq-h"><div class="wrap split">
+  <div><div class="eyebrow">{eyebrow}</div><h2 id="faq-h" class="display">{title}</h2></div>
+  <div class="faq">{items}</div></div></section>'''
 
 # ───────────────────────── componentes ─────────────────────────
 def badge(p):
@@ -168,23 +192,26 @@ def card(p, cls='', thumb=True, data=False, n=1):
     <div class="meta">{meta(p)}</div><span class="more">Ver propiedad</span></div>
 </a>'''
 
-def consent():
+def consent(en=False):
+    if en:
+        return '''<label class="consent"><input type="checkbox" name="privacidad" required> <span>I have read and accept the <a href="/privacidad/">privacy policy</a> and authorise Volta to contact me about this request.</span></label>'''
     return '''<label class="consent"><input type="checkbox" name="privacidad" required> <span>He leído y acepto la <a href="/privacidad/">política de privacidad</a> y autorizo a Volta a contactarme en relación con esta solicitud.</span></label>'''
 
-def contact_form(kind, button='Enviar', interests=None, inmueble=None, message_ph='Cuéntanos qué necesitas', checked=None):
+def contact_form(kind, button='Enviar', interests=None, inmueble=None, message_ph='Cuéntanos qué necesitas', checked=None, en=False):
+    L = dict(n='Name', t='Phone', e='Email', m='Message', i='I am interested in') if en else dict(n='Nombre', t='Teléfono', e='Email', m='Mensaje', i='Me interesa')
     ints = ''
     if interests:
-        ints = '<fieldset class="field"><legend>Me interesa</legend><div class="choices">' + ''.join(
+        ints = f'<fieldset class="field"><legend>{L["i"]}</legend><div class="choices">' + ''.join(
             f'<label><input type="checkbox" name="interes" value="{E(i)}"{" checked" if i == checked else ""}><span>{E(i)}</span></label>' for i in interests) + '</div></fieldset>'
     hid = f'<input type="hidden" name="inmueble" value="{E(inmueble)}">' if inmueble else ''
     return f'''<form class="form" data-form="{E(kind)}" novalidate>
   {hid}
-  <div class="field"><label for="{kind}-n">Nombre</label><input id="{kind}-n" type="text" name="nombre" autocomplete="name" required></div>
-  <div class="row"><div class="field"><label for="{kind}-t">Teléfono</label><input id="{kind}-t" type="tel" name="telefono" autocomplete="tel" required></div>
-  <div class="field"><label for="{kind}-e">Email</label><input id="{kind}-e" type="email" name="email" autocomplete="email" required></div></div>
+  <div class="field"><label for="{kind}-n">{L['n']}</label><input id="{kind}-n" type="text" name="nombre" autocomplete="name" required></div>
+  <div class="row"><div class="field"><label for="{kind}-t">{L['t']}</label><input id="{kind}-t" type="tel" name="telefono" autocomplete="tel" required></div>
+  <div class="field"><label for="{kind}-e">{L['e']}</label><input id="{kind}-e" type="email" name="email" autocomplete="email" required></div></div>
   {ints}
-  <div class="field"><label for="{kind}-m">Mensaje</label><textarea id="{kind}-m" name="mensaje" placeholder="{E(message_ph)}"></textarea></div>
-  {consent()}
+  <div class="field"><label for="{kind}-m">{L['m']}</label><textarea id="{kind}-m" name="mensaje" placeholder="{E(message_ph)}"></textarea></div>
+  {consent(en)}
   <button class="btn btn-primary" type="submit" data-label="{E(button)}">{E(button)}</button>
   <p class="form-msg" role="status" hidden></p>
 </form>'''
@@ -310,7 +337,7 @@ def home():
   <div class="hero-bg" role="img" aria-label="{hero_alt}" style="background-image:url(/assets/img/hero.jpg)"></div>
   <div class="hero-main"><div class="wrap"><div style="max-width:780px">
     <div class="eyebrow">Gestión · Alquiler · Compraventa</div>
-    <h1 id="h1">Tu propiedad, <span>nuestra gestión.</span></h1>
+    <h1 id="h1"><small class="h1-kw">Gestión de alquileres en Barcelona</small>Tu propiedad, <span>nuestra gestión</span></h1>
     <p class="lead hero-lead">Gestionamos, alquilamos y comercializamos propiedades en Barcelona, ofreciendo un servicio integral y personalizado para que cada propietario disfrute de su inversión sin ocuparse de la gestión diaria.</p>
     <div class="actions"><a class="btn btn-primary" href="/propietarios/gestion-integral/">Descubre nuestra gestión</a><a class="btn btn-ghost" href="#inmuebles">Explora nuestros inmuebles</a></div>
   </div></div></div>
@@ -341,7 +368,7 @@ def home():
       <p style="margin-top:.9rem">Nos encargamos de la comercialización y de toda la gestión operativa del inmueble durante la estancia del inquilino: atención, incidencias, mantenimiento, limpiezas, check-in y check-out.</p>
       <a class="link" href="/propietarios/gestion-integral/">Cómo funciona la gestión</a></div></article>
     <div class="svc-side">
-      <article class="svc reveal"><span class="num">02</span><h3 class="h3">Alquiler de inmuebles</h3><p>Comercializamos viviendas de alquiler temporal y corporativo en Barcelona, preparadas para entrar a vivir.</p><a class="link" href="/alquilar/">Ver viviendas en alquiler</a></article>
+      <article class="svc reveal"><span class="num">02</span><h3 class="h3">Alquiler de inmuebles</h3><p>Comercializamos viviendas de <a href="/propietarios/alquiler-temporada/" style="text-decoration:underline">alquiler de temporada</a> y <a href="/propietarios/alquiler-corporativo/" style="text-decoration:underline">alquiler corporativo</a> en Barcelona, preparadas para entrar a vivir.</p><a class="link" href="/alquilar/">Ver viviendas en alquiler</a></article>
       <article class="svc reveal"><span class="num">03</span><h3 class="h3">Compraventa</h3><p>Ayudamos a propietarios a vender su vivienda y a compradores a encontrar la propiedad que buscan.</p><a class="link" href="/propietarios/vender/">Vender con Volta</a></article>
     </div>
   </div>
@@ -374,7 +401,7 @@ def home():
 {cta_band()}'''
     page('/', 'Volta BCN | Gestión integral, alquiler y venta de viviendas en Barcelona',
          'Gestionamos, alquilamos y comercializamos viviendas en Barcelona. Atención al inquilino y equipo propio de mantenimiento durante toda la estancia.',
-         body, overlay=True, jsonld=[ORG])
+         body, overlay=True, jsonld=[ORG, WEBSITE])
 
 def catalog(op):
     is_rent = op == 'alquiler'
@@ -478,7 +505,10 @@ def ficha(p):
            "numberOfRooms": p['habitaciones'],
            "address": {"@type": "PostalAddress", "addressLocality": "Barcelona", "addressRegion": "Cataluña", "addressCountry": "ES"},
            "containedInPlace": {"@type": "Place", "name": f"{p['barrio']}, {p['distrito']}, Barcelona"}}
-    page(path, f"{p['titulo']} · {p['barrio']} | Volta BCN", f"{p['resumen']} {p['superficie']} m², {p['habitaciones']} hab. Solicita información.",
+    t_seo = f"{p['titulo']} · {p['barrio']} | Volta BCN"
+    if len(t_seo) > 65 or p['barrio'].split()[-1].lower() in p['titulo'].lower():
+        t_seo = f"{p['titulo']}, Barcelona | Volta BCN"
+    page(path, t_seo, f"{p['resumen']} {p['superficie']} m², {p['habitaciones']} hab. Solicita información.",
          body, jsonld=[res, breadcrumb_ld(('Alquilar' if is_rent else 'Comprar', '/alquilar/' if is_rent else '/comprar/'), (p['titulo'], path))],
          image=foto(p, 1))
 
@@ -514,7 +544,8 @@ def gestion():
 
 <section class="section bg-orange"><div class="wrap split">
   <div><div class="eyebrow">Qué incluye</div><h2 class="display">Un servicio <em>completo.</em></h2>
-    <p class="lead" style="margin-top:1.4rem">Adaptamos la gestión a cada vivienda y a cada propietario: alquiler temporal y corporativo, larga estancia, coliving o edificios completos.</p></div>
+    <p class="lead" style="margin-top:1.4rem">Adaptamos la gestión a cada vivienda y a cada propietario: alquiler temporal y corporativo, larga estancia, coliving o edificios completos.</p>
+    <p style="margin-top:1.4rem"><a class="link" href="/propietarios/alquiler-temporada/">Alquiler de temporada</a> &nbsp; <a class="link" href="/propietarios/alquiler-corporativo/">Alquiler corporativo</a></p></div>
   <ul class="svc-list">{lis}</ul>
 </div></section>
 
@@ -525,10 +556,11 @@ def gestion():
     <p class="lead" style="margin-top:1.4rem">Aunque el inquilino hable con nosotros, la relación con el propietario es la que más cuidamos. Queremos ser el equipo al que llamas para todo lo relacionado con tu vivienda, hoy y dentro de muchos años.</p></div>
   <div id="solicitud">{contact_form('gestion-integral', 'Solicitar propuesta de gestión', interests=['Alquiler temporal', 'Alquiler corporativo', 'Larga estancia', 'Aún no lo sé'], message_ph='Barrio, metros, situación actual de la vivienda…')}</div>
 </div></section>
+{faq_block(FAQ_GESTION)}
 {testimonials_block()}'''
     page(path, 'Gestión integral de alquileres en Barcelona | Volta BCN',
          'Property management en Barcelona: el inquilino contacta con Volta y nuestro equipo propio de mantenimiento resuelve las incidencias. Tú delegas la gestión diaria.',
-         body, jsonld=[ORG, breadcrumb_ld(('Gestión integral de alquileres', path))])
+         body, jsonld=[ORG, breadcrumb_ld(('Gestión integral de alquileres', path)), faq_ld(FAQ_GESTION)])
 
 def vender():
     path = '/propietarios/vender/'
@@ -636,6 +668,155 @@ def not_found():
 <div class="actions" style="margin-top:2rem"><a class="btn btn-primary" href="/">Volver al inicio</a><a class="link" href="/alquilar/">Ver alquileres</a><a class="link" href="/comprar/">Ver ventas</a></div></div></section>'''
     page('/404.html', 'Página no encontrada | Volta BCN', 'La página que buscas no existe.', body, index=False)
 
+
+FAQ_GESTION = [
+    ('Qué incluye la gestión integral de un alquiler en Barcelona?',
+     'Incluye la comercialización de la vivienda, la selección del inquilino, el contrato, la entrada y, sobre todo, la gestión durante toda la estancia: atención al inquilino, incidencias, mantenimiento con equipo propio, limpiezas, check-in y check-out y supervisión de la vivienda.'),
+    ('Quién atiende al inquilino cuando hay una avería?',
+     'Volta. El inquilino nos contacta directamente y nuestro equipo coordina la solución. El propietario solo interviene cuando una decisión requiere su autorización.'),
+    ('Cuánto cuesta la gestión integral?',
+     'Depende de la vivienda y de la modalidad de alquiler. Te preparamos una propuesta personalizada después de conocer el inmueble, sin compromiso.'),
+    ('Trabajáis en toda Barcelona?',
+     'Sí. Gestionamos viviendas en los distintos barrios de Barcelona, como el Eixample, Gràcia, Sant Gervasi, Les Corts, Poblenou o Ciutat Vella.'),
+    ('Puedo seguir decidiendo sobre mi vivienda?',
+     'Sí. Delegas la gestión diaria, pero sigues informado y decides en todo lo importante: precio, perfil de inquilino, reparaciones relevantes y renovaciones.'),
+]
+
+FAQ_TEMPORADA = [
+    ('Qué ha cambiado en el alquiler de temporada en Cataluña?',
+     'Desde el 1 de enero de 2026 está en vigor la Ley 11/2025. Los alquileres de temporada por trabajo, estudios, atención médica o situaciones provisionales deben justificar su causa, y en las zonas tensionadas quedan sujetos a los mismos límites de renta que la vivienda habitual.'),
+    ('Sigue siendo posible alquilar por temporada en Barcelona?',
+     'Sí, pero hay que elegir bien la modalidad y documentarla correctamente. La ley excluye los arrendamientos de finalidad exclusivamente recreativa, vacacional o de ocio, que deben indicar esa finalidad y la residencia permanente del inquilino.'),
+    ('Volta gestiona pisos turísticos?',
+     'No. Trabajamos con alquileres de temporada de más de 31 días y con alquileres corporativos firmados directamente con empresas. No gestionamos viviendas de uso turístico.'),
+    ('Qué documentación necesita un contrato de temporada?',
+     'El contrato debe recoger la finalidad del alquiler y la residencia permanente del inquilino, y conviene conservar la documentación que lo acredite. Revisamos cada caso contigo y, cuando hace falta, con asesoramiento jurídico especializado.'),
+    ('Qué pasa si mi piso ya está alquilado por temporada?',
+     'La nueva regulación también afecta a las viviendas que ya estaban en alquiler de temporada. Te ayudamos a revisar tu situación y a decidir si te conviene mantener la temporada, pasar a corporativo, a larga estancia o vender.'),
+]
+
+FAQ_CORP = [
+    ('Qué es un alquiler corporativo?',
+     'Es un contrato que se firma directamente con una empresa, que usa la vivienda para alojar a sus profesionales durante el tiempo que necesite.'),
+    ('Qué ventajas tiene para el propietario?',
+     'La contraparte es una empresa, la ocupación suele ser estable y los profesionales que se alojan buscan viviendas cuidadas y bien equipadas. Volta se ocupa de la relación con la empresa y de la gestión durante toda la estancia.'),
+    ('Qué tipo de vivienda funciona mejor?',
+     'Pisos amueblados y equipados, listos para entrar a vivir, bien comunicados y en barrios con demanda profesional como el Eixample, Gràcia, Poblenou o el 22@.'),
+    ('Mi empresa necesita alojar a empleados en Barcelona. Podéis ayudarnos?',
+     'Sí. Dinos fechas, número de personas, zona y presupuesto orientativo, y te proponemos viviendas preparadas para entrar a vivir, con atención durante toda la estancia.'),
+]
+
+def landing(path, crumb, h1, lead, img, img_alt, sections, faq, form_kind, form_interests, title, desc, cta='Quiero una propuesta'):
+    body = f'''<section class="page-hero"><div class="txt">{crumbs(('Propietarios', None), (crumb, None))}
+  <h1 class="display">{h1}</h1>
+  <p class="lead" style="margin-top:1.4rem">{lead}</p>
+  <div class="actions" style="margin-top:2rem"><a class="btn btn-primary" href="#solicitud">{cta}</a><a class="link" href="/propietarios/valorar/">Valorar mi vivienda</a></div></div>
+  <div class="img" style="background-image:url({img})" role="img" aria-label="{E(img_alt)}"></div></section>
+{sections}
+{faq_block(faq)}
+<section class="section bg-light" id="solicitud"><div class="wrap split">
+  <div><h2 class="display">Hablemos de <em>tu vivienda.</em></h2>
+    <p class="lead" style="margin-top:1.4rem">Cuéntanos dónde está, cómo es y qué situación tiene ahora. Te llamamos y te explicamos qué opción tiene más sentido, sin compromiso.</p>
+    <p style="margin-top:1.4rem"><a class="link" href="/propietarios/gestion-integral/">Cómo funciona la gestión integral</a></p></div>
+  <div>{contact_form(form_kind, 'Solicitar propuesta', interests=form_interests, message_ph='Barrio, metros, situación actual de la vivienda…')}</div>
+</div></section>
+{testimonials_block()}'''
+    page(path, title, desc, body, jsonld=[ORG, breadcrumb_ld((crumb, path)), faq_ld(faq)])
+
+def temporada():
+    sections = f'''<section class="section"><div class="wrap split">
+  <div><h2 class="display">Qué cambia con la <em>Ley 11/2025.</em></h2></div>
+  <div class="prose">
+    <p>Desde el 1 de enero de 2026, Cataluña regula el alquiler de temporada. Los contratos por motivos de trabajo, estudios, atención médica o situaciones provisionales tienen que justificar su causa y, en las zonas de mercado tensionado, como Barcelona, quedan sujetos a los mismos límites de renta que la vivienda habitual.</p>
+    <p>La ley deja fuera los arrendamientos de finalidad exclusivamente recreativa, vacacional o de ocio, que deben indicar esa finalidad y la residencia permanente del inquilino. Y no se aplica a las viviendas de uso turístico, que tienen su propia normativa.</p>
+    <p>Para el propietario, esto significa que ya no basta con firmar un contrato de once meses: hay que elegir bien la modalidad, redactar el contrato con cuidado y conservar la documentación. Es justo lo que hacemos en Volta.</p>
+  </div></div></section>
+<section class="section bg-orange"><div class="wrap split">
+  <div><h2 class="display">Dos modelos, <em>bien planteados.</em></h2></div>
+  <div class="prose">
+    <h3>Alquiler de temporada de más de 31 días</h3>
+    <p>Estancias de media duración para personas que viven en otra ciudad o en otro país y pasan unos meses en Barcelona. Preparamos el contrato con la finalidad y la residencia permanente del inquilino bien recogidas.</p>
+    <h3>Alquiler corporativo</h3>
+    <p>Contratos firmados directamente con empresas que alojan a sus profesionales en Barcelona. <a href="/propietarios/alquiler-corporativo/" style="text-decoration:underline">Ver cómo funciona el alquiler corporativo</a>.</p>
+    <p>No gestionamos pisos turísticos. Si tu vivienda encaja mejor en una larga estancia o en una venta, también te lo diremos.</p>
+  </div></div></section>
+<section class="section"><div class="wrap split">
+  <div><h2 class="display">Qué hacemos <em>por ti.</em></h2></div>
+  <ul class="svc-list" style="color:inherit">
+    <li>Análisis de tu vivienda y de la modalidad que mejor encaja</li>
+    <li class="hl">Contratos de temporada redactados con la finalidad y la documentación necesarias</li>
+    <li>Preparación, fotografías y comercialización</li>
+    <li>Selección de inquilinos con perfil solvente</li>
+    <li class="hl">Atención al inquilino durante toda la estancia</li>
+    <li>Mantenimiento con equipo propio, limpiezas, check-in y check-out</li>
+    <li>Rotación entre estancias para reducir los periodos vacíos</li>
+  </ul></div></section>'''
+    landing('/propietarios/alquiler-temporada/', 'Alquiler de temporada',
+            'Alquiler de temporada en Barcelona, <em>bien gestionado.</em>',
+            'Gestionamos pisos en alquiler de temporada de más de 31 días en Barcelona, con contratos adaptados a la Ley 11/2025 y un equipo que atiende al inquilino durante toda la estancia.',
+            '/inmuebles/eixample/01.jpg', 'Salón de un ático en alquiler de temporada gestionado por Volta en el Eixample',
+            sections, FAQ_TEMPORADA, 'alquiler-temporada', ['Alquiler de temporada', 'Alquiler corporativo', 'Aún no lo sé'],
+            'Alquiler de temporada en Barcelona para propietarios | Volta BCN',
+            'Gestión de pisos en alquiler de temporada en Barcelona adaptada a la Ley 11/2025: contrato, inquilinos, mantenimiento y atención durante toda la estancia.')
+
+def corporativo():
+    sections = f'''<section class="section"><div class="wrap split">
+  <div><h2 class="display">Una empresa al otro lado <em>del contrato.</em></h2></div>
+  <div class="prose">
+    <p>En el alquiler corporativo, el contrato se firma directamente con una empresa, que utiliza la vivienda para alojar a sus profesionales en Barcelona durante el tiempo que lo necesite: un proyecto, una incorporación o un traslado.</p>
+    <p>Para el propietario, la contraparte es una compañía y no un particular, y los profesionales que se alojan buscan viviendas cuidadas, bien equipadas y listas para entrar a vivir. Para la empresa, Volta es un único interlocutor que resuelve cualquier necesidad de la vivienda durante toda la estancia.</p>
+    <p>Hemos alojado a profesionales de multinacionales tecnológicas, consultoras, empresas de automoción, moda y gran consumo, y entidades deportivas de Barcelona.</p>
+  </div></div></section>
+<section class="section bg-orange"><div class="wrap split">
+  <div><h2 class="display">Para propietarios <em>y para empresas.</em></h2></div>
+  <div class="prose">
+    <h3>Si tienes una vivienda</h3>
+    <p>Valoramos si tu piso encaja en el alquiler corporativo, lo preparamos, buscamos la empresa, formalizamos el contrato y gestionamos toda la estancia con nuestro equipo de mantenimiento.</p>
+    <h3>Si eres una empresa</h3>
+    <p>Dinos fechas, número de personas, zona y presupuesto orientativo. Te proponemos viviendas amuebladas en Barcelona y nos ocupamos de la entrada, la salida y cualquier incidencia. <a href="/alquilar/" style="text-decoration:underline">Ver viviendas en alquiler</a>.</p>
+  </div></div></section>'''
+    landing('/propietarios/alquiler-corporativo/', 'Alquiler corporativo',
+            'Alquiler corporativo en Barcelona: <em>tu piso, para empresas.</em>',
+            'Alquilamos y gestionamos viviendas en Barcelona con contratos firmados directamente con empresas que alojan a sus profesionales, con atención y mantenimiento durante toda la estancia.',
+            '/assets/img/gestion.jpg', 'Salón luminoso con balcón en un piso del Eixample de Barcelona',
+            sections, FAQ_CORP, 'alquiler-corporativo', ['Tengo una vivienda', 'Soy una empresa', 'Otro'],
+            'Alquiler corporativo en Barcelona | Pisos para empresas | Volta BCN',
+            'Alquiler corporativo en Barcelona: contratos directos con empresas para alojar a sus profesionales, con gestión y mantenimiento durante toda la estancia.',
+            cta='Solicitar información')
+
+def english():
+    path = '/en/'
+    body = f'''<section class="page-hero"><div class="txt"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Volta (ES)</a><span>/</span><span aria-current="page" style="margin:0">English</span></nav>
+  <h1 class="display">Furnished apartments and property management <em>in Barcelona.</em></h1>
+  <p class="lead" style="margin-top:1.4rem">Volta rents and manages homes in Barcelona: medium-term furnished apartments, corporate housing for companies, and full property management for owners who live elsewhere.</p>
+  <div class="actions" style="margin-top:2rem"><a class="btn btn-primary" href="#contact">Get in touch</a><a class="link" href="/alquilar/">See our rentals</a></div></div>
+  <div class="img" style="background-image:url(/inmuebles/eixample/01.jpg)" role="img" aria-label="Living room of a penthouse in the Eixample managed by Volta"></div></section>
+<section class="section"><div class="wrap split">
+  <div><h2 class="display">Looking for <em>a home?</em></h2></div>
+  <div class="prose">
+    <h3>Medium-term rentals (over 31 days)</h3>
+    <p>Furnished, fully equipped apartments for people spending a few months in Barcelona. Throughout your stay you deal with Volta, not the owner: we answer your calls and our own maintenance team fixes whatever comes up.</p>
+    <h3>Corporate housing</h3>
+    <p>We sign directly with companies that need to house their staff in Barcelona for a project, an onboarding or a relocation. Tell us your dates, number of people, preferred area and budget, and we will send you options.</p>
+    <p>We do not offer tourist or holiday lets.</p>
+  </div></div></section>
+<section class="section bg-orange"><div class="wrap split">
+  <div><h2 class="display">Own a property <em>in Barcelona?</em></h2></div>
+  <div class="prose">
+    <p>Many of our owners live outside Barcelona or abroad. We market the property, choose the tenant with you, sign the contract and then stay in charge during the whole stay: tenant support, repairs with our in-house maintenance team, cleaning, check-in and check-out.</p>
+    <p>Since January 2026, Catalan law (Ley 11/2025) regulates seasonal rentals and applies rent caps in high-demand areas such as Barcelona. We help you choose the rental model that fits your property and set up the contract correctly.</p>
+    <p>We also help owners sell. We are members of API and AICAT, the professional real estate agent associations of Catalonia.</p>
+  </div></div></section>
+<section class="section" id="contact"><div class="wrap split">
+  <div><h2 class="display">Let's <em>talk.</em></h2>
+    <p class="lead" style="margin-top:1.4rem">We speak English. Call us, send a WhatsApp or write to us and a member of the team will reply.</p>
+    <p style="margin-top:1.4rem"><a class="link" href="{TEL_LINK}">{TEL}</a> &nbsp; <a class="link" href="{WA_LINK}" target="_blank" rel="noopener">WhatsApp</a> &nbsp; <a class="link" href="mailto:{EMAIL}">{EMAIL}</a></p></div>
+  <div>{contact_form('english', 'Send', interests=['Rent a home', 'Corporate housing', 'Property management', 'Sell'], message_ph='Dates, number of people, area, budget, or details about your property…', en=True)}</div>
+</div></section>'''
+    page(path, 'Furnished Apartments & Property Management in Barcelona | Volta BCN',
+         'Medium-term furnished apartments, corporate housing and full property management in Barcelona. In-house maintenance team and tenant support during the whole stay.',
+         body, jsonld=[ORG], lang='en')
+
 def sitemap():
     today = datetime.date.today().isoformat()
     urls = ''.join(f'<url><loc>{SITE}{p}</loc><lastmod>{today}</lastmod></url>' for p in PAGES)
@@ -645,7 +826,7 @@ def sitemap():
 if __name__ == '__main__':
     home(); catalog('alquiler'); catalog('venta')
     for p in PROPS: ficha(p)
-    gestion(); vender(); valorar(); nosotros(); contacto(); opiniones()
+    gestion(); temporada(); corporativo(); english(); vender(); valorar(); nosotros(); contacto(); opiniones()
     legal('aviso-legal', 'Aviso legal'); legal('privacidad', 'Política de privacidad'); legal('cookies', 'Política de cookies')
     not_found(); sitemap()
     print(f'{len(PAGES)} páginas indexables generadas.')

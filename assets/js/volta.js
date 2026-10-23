@@ -114,7 +114,8 @@
   }
   function now() { return new Date().toLocaleString('es-ES'); }
   function msg(form, text, err) { var m = $('.form-msg', form); m.textContent = text; m.classList.toggle('err', !!err); m.hidden = false; }
-  var FALLBACK = 'No hemos podido enviar el formulario. Escríbenos a info@voltabcn.com o llámanos al +34 647 224 442.';
+  var EN = document.documentElement.lang === 'en';
+  var FALLBACK = EN ? 'We could not send the form. Please write to info@voltabcn.com or call +34 647 224 442.' : 'No hemos podido enviar el formulario. Escríbenos a info@voltabcn.com o llámanos al +34 647 224 442.';
 
   /* Formularios de contacto, visita y propietarios */
   $$('form[data-form]').forEach(function (f) {
@@ -133,9 +134,9 @@
         estado: 'Interés: ' + interes, precio_venta: mensaje || '—', precio_alquiler: '—',
         fecha: now(), interes: interes, mensaje: mensaje, inmueble: inmueble, pagina: location.href
       };
-      btn.disabled = true; btn.textContent = 'Enviando…';
+      btn.disabled = true; btn.textContent = EN ? 'Sending…' : 'Enviando…';
       send(p).then(function () {
-        f.reset(); msg(f, 'Gracias, ' + nombre + '. Hemos recibido tu mensaje y te contactaremos lo antes posible.');
+        f.reset(); msg(f, EN ? 'Thank you, ' + nombre + '. We have received your message and will get back to you shortly.' : 'Gracias, ' + nombre + '. Hemos recibido tu mensaje y te contactaremos lo antes posible.');
       }, function () { msg(f, FALLBACK, true); })
         .then(function () { btn.disabled = false; btn.textContent = btn.getAttribute('data-label'); });
     });
