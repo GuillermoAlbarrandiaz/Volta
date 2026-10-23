@@ -77,7 +77,7 @@ def footer():
         <p><a href="mailto:{EMAIL}">{EMAIL}</a><br><a href="{TEL_LINK}">{TEL}</a></p></div>
       <div><h4>Inmuebles</h4><ul><li><a href="/alquilar/">Alquilar</a></li><li><a href="/comprar/">Comprar</a></li></ul></div>
       <div><h4>Propietarios</h4><ul>{''.join(f'<li><a href="{h}">{t}</a></li>' for t, s, h in OWN)}</ul></div>
-      <div><h4>Volta</h4><ul><li><a href="/nosotros/">Nosotros</a></li><li><a href="/opiniones/">Opiniones</a></li><li><a href="/contacto/">Contacto</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li></ul></div>
+      <div><h4>Volta</h4><ul><li><a href="/nosotros/">Nosotros</a></li><li><a href="/opiniones/">Opiniones</a></li><li><a href="/contacto/">Contacto</a></li></ul></div>
     </div>
     <div class="foot-bottom"><span>© {YEAR} Volta BCN · Barcelona</span>
       <nav aria-label="Legal"><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Política de privacidad</a><a href="/cookies/">Política de cookies</a></nav></div>
@@ -832,9 +832,9 @@ def sitemap():
 if __name__ == '__main__':
     home(); catalog('alquiler'); catalog('venta')
     for p in PROPS: ficha(p)
-    gestion(); temporada(); corporativo(); english(); vender(); valorar(); nosotros(); contacto(); opiniones()
+    gestion(); temporada(); corporativo(); vender(); valorar(); nosotros(); contacto(); opiniones()
     legal('aviso-legal', 'Aviso legal'); legal('privacidad', 'Política de privacidad'); legal('cookies', 'Política de cookies')
     not_found()
-    PAGES += idiomes.build_ca(RAW, ROOT, SITE)
+    PAGES += idiomes.build_all(RAW, ROOT, SITE)
     sitemap()
     print(f'{len(PAGES)} páginas indexables generadas.')
