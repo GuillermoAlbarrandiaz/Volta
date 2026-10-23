@@ -87,7 +87,7 @@
         });
         it.hidden = !ok; if (ok) n++;
       });
-      if (count) count.textContent = n === 1 ? '1 inmueble' : n + ' inmuebles';
+      if (count) count.textContent = n === 1 ? T('1 inmueble', '1 immoble', '1 property') : n + T(' inmuebles', ' immobles', ' properties');
       if (empty) empty.hidden = n > 0;
     };
     sel.forEach(function (s) { s.addEventListener('change', apply); }); apply();
@@ -114,8 +114,11 @@
   }
   function now() { return new Date().toLocaleString('es-ES'); }
   function msg(form, text, err) { var m = $('.form-msg', form); m.textContent = text; m.classList.toggle('err', !!err); m.hidden = false; }
-  var EN = document.documentElement.lang === 'en';
-  var FALLBACK = EN ? 'We could not send the form. Please write to info@voltabcn.com or call +34 647 224 442.' : 'No hemos podido enviar el formulario. Escríbenos a info@voltabcn.com o llámanos al +34 647 224 442.';
+  var LANG = document.documentElement.lang, EN = LANG === 'en', CA = LANG === 'ca';
+  var T = function (es, ca, en) { return EN ? en : (CA ? ca : es); };
+  var FALLBACK = T('No hemos podido enviar el formulario. Escríbenos a info@voltabcn.com o llámanos al +34 647 224 442.',
+                   "No hem pogut enviar el formulari. Escriu-nos a info@voltabcn.com o truca'ns al +34 647 224 442.",
+                   'We could not send the form. Please write to info@voltabcn.com or call +34 647 224 442.');
 
   /* Formularios de contacto, visita y propietarios */
   $$('form[data-form]').forEach(function (f) {
@@ -134,9 +137,9 @@
         estado: 'Interés: ' + interes, precio_venta: mensaje || '—', precio_alquiler: '—',
         fecha: now(), interes: interes, mensaje: mensaje, inmueble: inmueble, pagina: location.href
       };
-      btn.disabled = true; btn.textContent = EN ? 'Sending…' : 'Enviando…';
+      btn.disabled = true; btn.textContent = T('Enviando…', 'Enviant…', 'Sending…');
       send(p).then(function () {
-        f.reset(); msg(f, EN ? 'Thank you, ' + nombre + '. We have received your message and will get back to you shortly.' : 'Gracias, ' + nombre + '. Hemos recibido tu mensaje y te contactaremos lo antes posible.');
+        f.reset(); msg(f, T('Gracias, ' + nombre + '. Hemos recibido tu mensaje y te contactaremos lo antes posible.', 'Gràcies, ' + nombre + '. Hem rebut el teu missatge i et contactarem al més aviat possible.', 'Thank you, ' + nombre + '. We have received your message and will get back to you shortly.'));
       }, function () { msg(f, FALLBACK, true); })
         .then(function () { btn.disabled = false; btn.textContent = btn.getAttribute('data-label'); });
     });
@@ -171,7 +174,7 @@
       var r = $('.result', f.parentNode);
       $('[data-r=venta]', r).textContent = fmt(sMid);
       $('[data-r=venta-rg]', r).textContent = fmt(sMid - 35000) + ' – ' + fmt(sMid + 35000);
-      $('[data-r=alq]', r).textContent = fmt(rMid) + '/mes';
+      $('[data-r=alq]', r).textContent = fmt(rMid) + T('/mes', '/mes', '/month');
       $('[data-r=alq-rg]', r).textContent = fmt(rMid - 150) + ' – ' + fmt(rMid + 150) + '/mes';
       r.classList.add('show'); r.scrollIntoView({ behavior:'smooth', block:'nearest' });
       var sel = $('select[name=barrio]', f), barrio = sel.options[sel.selectedIndex].text;
@@ -183,7 +186,7 @@
         precio_venta: fmt(sMid) + ' (' + fmt(sMid - 35000) + ' – ' + fmt(sMid + 35000) + ')',
         precio_alquiler: fmt(rMid) + '/mes (' + fmt(rMid - 150) + ' – ' + fmt(rMid + 150) + '/mes)',
         fecha: now(), interes: interes
-      }).then(function () { msg(f, 'Te enviaremos el detalle y nos pondremos en contacto contigo.'); }, function () { msg(f, FALLBACK, true); });
+      }).then(function () { msg(f, T('Te enviaremos el detalle y nos pondremos en contacto contigo.', "T'enviarem el detall i ens posarem en contacte amb tu.", 'We will send you the details and get in touch with you.')); }, function () { msg(f, FALLBACK, true); });
     });
   });
 })();

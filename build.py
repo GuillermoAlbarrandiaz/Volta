@@ -6,7 +6,7 @@ Para añadir, editar o retirar un inmueble basta con modificar data/inmuebles.js
 y poner sus fotos en inmuebles/<carpeta>/01.jpg, 02.jpg…  Después se vuelve a ejecutar.
 """
 import json, os, re, html, datetime
-import silabas
+import silabas, idiomes
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -21,6 +21,7 @@ E = lambda s: html.escape(str(s), quote=True)
 PROPS = json.load(open(ROOT / 'data/inmuebles.json', encoding='utf-8'))
 TESTI = json.load(open(ROOT / 'data/testimonios.json', encoding='utf-8'))
 PAGES = []  # para el sitemap
+RAW = {}    # HTML en castellano antes de los guiones suaves, para generar /ca/
 
 def url_of(p):
     return f"/{'alquilar' if p['operacion'] == 'alquiler' else 'comprar'}/{p['id']}/"
@@ -53,6 +54,7 @@ def header(path, overlay=False):
       <a href="/nosotros/"{cur('/nosotros/')}>Nosotros</a>
       <a href="/contacto/"{cur('/contacto/')}>Contacto</a>
     </nav>
+    {idiomes.switch(path)}
     <a class="header-cta" href="{TEL_LINK}">{TEL}</a>
     <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mnav"><span></span></button>
   </div>
@@ -62,6 +64,7 @@ def header(path, overlay=False):
   <a href="/">Inicio</a><a href="/comprar/">Comprar</a><a href="/alquilar/">Alquilar</a>
   <div class="sub"><p>Propietarios</p>{''.join(f'<a href="{h}">{t}</a>' for t, s, h in OWN)}</div>
   <a href="/nosotros/">Nosotros</a><a href="/contacto/">Contacto</a>
+  {idiomes.switch(path, mobile=True)}
   <div class="contact"><a href="{TEL_LINK}">{TEL}</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="{WA_LINK}" rel="noopener" target="_blank">WhatsApp</a></div>
 </div>'''
 
@@ -111,7 +114,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 <meta name="theme-color" content="#1a1a1a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/volta.css?v=1793000000">
+<link rel="stylesheet" href="/assets/css/volta.css?v=1793100000">
 {extra_head}{ld}
 </head>
 <body>
@@ -121,12 +124,15 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 </main>
 {footer()}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-<script src="/assets/js/volta.js?v=1793000000" defer></script>
+<script src="/assets/js/volta.js?v=1793100000" defer></script>
 </body>
 </html>
 '''
     doc = re.sub(r'<div class="eyebrow">.*?</div>\s*', '', doc)   # sin mini títulos sobre los apartados
     doc = sin_punto(doc)
+    if lang == 'es' and not path.endswith('.html'):
+        RAW[path] = (doc, index)
+    doc = idiomes.finalize(doc, path, lang, SITE, index)
     if lang == 'es':
         doc = silabas.html(doc)                                       # guiones suaves para el texto justificado
     out = ROOT / path.lstrip('/') / 'index.html' if path.endswith('/') else ROOT / path.lstrip('/')
@@ -828,5 +834,7 @@ if __name__ == '__main__':
     for p in PROPS: ficha(p)
     gestion(); temporada(); corporativo(); english(); vender(); valorar(); nosotros(); contacto(); opiniones()
     legal('aviso-legal', 'Aviso legal'); legal('privacidad', 'Política de privacidad'); legal('cookies', 'Política de cookies')
-    not_found(); sitemap()
+    not_found()
+    PAGES += idiomes.build_ca(RAW, ROOT, SITE)
+    sitemap()
     print(f'{len(PAGES)} páginas indexables generadas.')

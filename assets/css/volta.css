@@ -643,3 +643,12 @@ p{color:#262626}
 .faq-item summary:after{content:"+";flex:none;font-size:1.5rem;font-weight:400;color:var(--orange);transition:transform .2s}
 .faq-item[open] summary:after{transform:rotate(45deg)}
 .faq-item p{margin:0 0 1.2rem}
+
+/* ── Selector de idioma ES · CA · EN ── */
+.langs{display:flex;gap:.15rem;margin-left:1.2rem;font-size:.78rem;font-weight:700;letter-spacing:.06em}
+.langs a{padding:.25rem .4rem;opacity:.6;transition:opacity .2s}
+.langs a:hover,.langs a[aria-current]{opacity:1}
+.langs a[aria-current]{text-decoration:underline;text-underline-offset:4px}
+.langs-m{margin:1.4rem 0 0;font-size:.95rem;gap:.6rem}
+@media (max-width:1100px){.site-header .langs:not(.langs-m){display:none}}
+.mnav .langs a{border:0!important;font-size:1.15rem!important;padding:.3rem .6rem!important}
