@@ -652,3 +652,10 @@ p{color:#262626}
 .langs-m{margin:1.4rem 0 0;font-size:.95rem;gap:.6rem}
 @media (max-width:1100px){.site-header .langs:not(.langs-m){display:none}}
 .mnav .langs a{border:0!important;font-size:1.15rem!important;padding:.3rem .6rem!important}
+
+/* Banderas bajo el selector de idioma */
+.langs a{display:flex;flex-direction:column;align-items:center;gap:4px;line-height:1}
+.langs a[aria-current]{text-decoration:none}
+.langs a[aria-current] span{text-decoration:underline;text-underline-offset:4px}
+.langs .flag{display:block;width:18px;height:12px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.18)}
+.mnav .langs .flag{width:28px;height:19px;border-radius:3px}

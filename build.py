@@ -114,7 +114,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 <meta name="theme-color" content="#1a1a1a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/volta.css?v=1793100000">
+<link rel="stylesheet" href="/assets/css/volta.css?v=1793200000">
 {extra_head}{ld}
 </head>
 <body>
@@ -124,7 +124,7 @@ def page(path, title, desc, body, overlay=False, jsonld=None, image='/assets/img
 </main>
 {footer()}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-<script src="/assets/js/volta.js?v=1793100000" defer></script>
+<script src="/assets/js/volta.js?v=1793200000" defer></script>
 </body>
 </html>
 '''

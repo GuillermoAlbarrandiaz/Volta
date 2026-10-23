@@ -72,10 +72,29 @@ def switch(path, mobile=False):
     """Marcador que finalize() sustituye por el selector ES · CA · EN."""
     return f'<!--LANGSW {int(mobile)}-->'
 
+def _flag(code, mobile):
+    """Bandera en SVG (los emojis de banderas no se ven en Windows y la senyera no tiene emoji)."""
+    if code == 'es':
+        body = '<rect width="3" height="2" fill="#AA151B"/><rect y=".5" width="3" height="1" fill="#F1BF00"/>'
+        vb = '0 0 3 2'
+    elif code == 'ca':
+        body = '<rect width="9" height="6" fill="#FCDD09"/>' + ''.join(f'<rect y="{y}" width="9" height=".667" fill="#DA121A"/>' for y in ('.667', '2', '3.333', '4.667'))
+        vb = '0 0 9 6'
+    else:
+        cid = f'uk{int(mobile)}'
+        body = (f'<clipPath id="{cid}"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath>'
+                '<rect width="60" height="30" fill="#012169"/>'
+                '<path d="M0,0L60,30M60,0L0,30" stroke="#fff" stroke-width="6"/>'
+                f'<path d="M0,0L60,30M60,0L0,30" clip-path="url(#{cid})" stroke="#C8102E" stroke-width="4"/>'
+                '<path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/>'
+                '<path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/>')
+        vb = '0 0 60 30'
+    return f'<svg class="flag" viewBox="{vb}" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">{body}</svg>'
+
 def _switch_html(es, lang, mobile):
     links = [('es', 'ES', 'Castellano', es or '/')] + [
         (c, c.upper(), LANGS[c]['name'], (lang_path(es, c) if es else None) or lang_path('/', c)) for c in LANGS]
-    a = ''.join(f'<a href="{h}" hreflang="{c}" lang="{c}" title="{t}"{" aria-current=\"true\"" if c == lang else ""}>{l}</a>' for c, l, t, h in links)
+    a = ''.join(f'<a href="{h}" hreflang="{c}" lang="{c}" title="{t}"{" aria-current=\"true\"" if c == lang else ""}><span>{l}</span>{_flag(c, mobile)}</a>' for c, l, t, h in links)
     label = LANGS[lang]['label'] if lang in LANGS else 'Idioma'
     return f'<nav class="langs{" langs-m" if mobile else ""}" aria-label="{label}">{a}</nav>'
 
